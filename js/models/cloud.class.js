@@ -1,5 +1,5 @@
 class Cloud extends MovableObject{
-
+    y = 20;
     width = 400;
     height = 250;
 
@@ -8,6 +8,11 @@ class Cloud extends MovableObject{
         
         //Koordinaten der Hünchen um sie etwas weiter hinten zu platzieren
         this.x = 600 * Math.random();
-        this.y = 20;
+        this.animate();
+    }
+    animate(){
+        setInterval(() => {
+            this.x -= 0.15;
+        }, 1000/60);
     }
 }
