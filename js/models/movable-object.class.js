@@ -11,16 +11,16 @@ class MovableObject {
     speedY = 0;
     acceleration = 2;
 
-    applyGravity(){
-        setInterval(()=>{
-            if(this.isAboveGround()|| this.speedY > 0 ){
-            this.y -= this.speedY;
-            this.speedY -= this.acceleration;
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
             }
-        }, 1000/25);
+        }, 1000 / 25);
     }
 
-    isAboveGround(){
+    isAboveGround() {
         return this.y < 140;
     }
 
@@ -29,6 +29,17 @@ class MovableObject {
         this.img.src = path;
     }
 
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        ctx.beginPath();
+        ctx.lineWidth = '5';
+        ctx.strokeStyle = 'blue';
+        ctx.rect(this.x, this.y, this.width, this.height);
+        ctx.stroke();
+    }
     loadImages(arr) {
         arr.forEach((path) => {
             let img = new Image();
@@ -52,7 +63,7 @@ class MovableObject {
         this.x += this.speed;
     }
 
-    jump(){
+    jump() {
         this.speedY = 25;
     }
 }
