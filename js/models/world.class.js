@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    coins = level1.coins;
     level = level1;
     enemies = level1.enemies;
     clouds = level1.clouds;
@@ -18,9 +19,13 @@ class World {
         this.setWorld();
     }
 
-    setWorld(){
-        this.character.world = this;
-    }
+    setWorld() {
+    this.character.world = this;
+    this.level.coins.forEach(coin => {
+        coin.world = this;
+        coin.initPosition();
+    });
+}
 
     draw() {
         //Clear Canvas
@@ -30,6 +35,7 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
 
