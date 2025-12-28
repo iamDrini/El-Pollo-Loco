@@ -19,15 +19,6 @@ class MovableObject extends DrawableObject{
         return this.y < 140;
     }
 
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
     //character.isColliding(chicken)
     isColliding(mo){
         return this.x + this.width > mo.x && 
@@ -35,6 +26,7 @@ class MovableObject extends DrawableObject{
             this.x  < mo.x &&
             this.y < mo.y + mo.height;
     }
+
 
     hit(){
         this.energy -= 5;
