@@ -40,7 +40,6 @@ class Character extends MovableObject {
         'img/2_character_pepe/4_hurt/H-41.png',
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png'
-
     ];
 
     constructor() {
@@ -72,7 +71,8 @@ class Character extends MovableObject {
         setInterval(() => {
 
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD)
+                this.playAnimation(this.IMAGES_DEAD);
+                this.applyGravityDead();
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
             }
