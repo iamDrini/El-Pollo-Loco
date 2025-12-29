@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    coins = level1.coins;
+    //coins = level1.coins;
     level = level1;
     enemies = level1.enemies;
     clouds = level1.clouds;
