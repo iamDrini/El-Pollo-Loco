@@ -1,8 +1,8 @@
-class Chicken extends MovableObject{
+class Chicken extends MovableObject {
 
     height = 60;
     width = 60;
-    y=370;
+    y = 370;
 
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
@@ -10,24 +10,28 @@ class Chicken extends MovableObject{
         'img/3_enemies_chicken/chicken_normal/1_walk/3_w.png',
     ];
 
-    
-    constructor(){
+
+    constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
+        this.energy = 5;
         //Koordinaten der Hünchen um sie etwas weiter hinten zu platzieren
-        this.x = 200 + 400 * Math.random();
+        this.x = 400 + 400 * Math.random();
         this.speed = 0.15 + Math.random() * 0.25;
         this.animate();
     }
 
-    animate(){
-        setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
+    animate() {
+        if (this.isDead()) {
 
-        setInterval(()=> {
-            this.playAnimation(this.IMAGES_WALKING);
-        }, 200);
+        } else {
+            setInterval(() => {
+                this.moveLeft();
+            }, 1000 / 60);
+
+            setInterval(() => {
+                this.playAnimation(this.IMAGES_WALKING);
+            }, 200);
+        }
     }
-
 }

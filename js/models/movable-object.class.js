@@ -1,4 +1,4 @@
-class MovableObject extends DrawableObject{
+class MovableObject extends DrawableObject {
     speed = 0.5;
     otherDirection = false;
     speedY = 0;
@@ -15,7 +15,7 @@ class MovableObject extends DrawableObject{
         }, 1000 / 25);
     }
 
-    applyGravityDead(){
+    applyGravityDead() {
         this.applyGravity();
         setInterval(() => {
             this.speedY = -3;
@@ -24,38 +24,47 @@ class MovableObject extends DrawableObject{
     }
 
     isAboveGround() {
-        if(this instanceof ThrowableObject){
+        if (this instanceof ThrowableObject) {
             return true;
-        }else{
-        return this.y < 140;
+        } else {
+            return this.y < 140;
         }
     }
 
     //character.isColliding(chicken)
-    isColliding(mo){
-        return this.x + this.width > mo.x && 
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
-            this.x  < mo.x &&
-            this.y < mo.y + mo.height;
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
+
+    }
+
+    //character.jumpOnChicken
+    isOnChicken(mo) {
+        return this.x < mo.x + mo.width &&
+            this.x + this.width > mo.x &&
+        this.y + this.height < mo.y &&
+            this.speedY < 0;
     }
 
 
-    hit(){
+    hit() {
         this.energy -= 5;
-        if(this.energy < 0){
+        if (this.energy < 0) {
             this.energy = 0;
-        }else{
+        } else {
             this.lastHit = new Date().getTime();
         }
     }
 
-    isHurt(){
+    isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; //difference in milliseconds
         timepassed = timepassed / 1000; //difference in seconds
-        return timepassed < 1 ;
+        return timepassed < 1;
     }
 
-    isDead(){
+    isDead() {
         return this.energy == 0;
     }
 
@@ -77,4 +86,5 @@ class MovableObject extends DrawableObject{
     jump() {
         this.speedY = 25;
     }
+
 }
