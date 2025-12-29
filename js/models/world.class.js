@@ -6,6 +6,7 @@ class World {
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
     statusBar = new StatusBar();
+    throwableObjects = [];
 
     canvas;
     ctx;
@@ -18,7 +19,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
@@ -30,15 +31,27 @@ class World {
 
     }
 
-    checkCollisions(){
+    run(){
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
+            this.checkCollisions();
+            this.checkThrowObjects();
+        },200);
+    }
+
+    checkCollisions(){
+        this.level.enemies.forEach((enemy) => {
                 if(this.character.isColliding(enemy)){
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy);
                 }
             });
-        },200);
+    }
+
+    checkThrowObjects(){
+        if(this.keyboard.D){
+            let bottle = new ThrowableObject(this.character.x,this.character.y);
+            this.throwableObjects.push(bottle);
+        }
     }
 
     draw() {
@@ -58,6 +71,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.throwableObjects);
 
         this.ctx.translate(-this.camera_x, 0);
 
