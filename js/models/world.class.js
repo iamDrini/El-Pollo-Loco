@@ -6,6 +6,7 @@ class World {
     clouds = level1.clouds;
     backgroundObjects = level1.backgroundObjects;
     statusBar = new StatusBar();
+    coinBar = new CoinBar();
     throwableObjects = [];
 
     canvas;
@@ -66,6 +67,7 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
+        this.addToMap(this.coinBar);
         this.ctx.translate(this.camera_x, 0);
 
 

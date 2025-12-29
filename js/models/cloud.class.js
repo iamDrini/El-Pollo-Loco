@@ -5,7 +5,6 @@ class Cloud extends MovableObject{
 
     constructor(){
         super().loadImage('img/5_background/layers/4_clouds/1.png');
-        
         //Koordinaten der Hünchen um sie etwas weiter hinten zu platzieren
         this.x = 600 * Math.random();
         this.animate();
@@ -13,6 +12,4 @@ class Cloud extends MovableObject{
     animate(){
         this.moveLeft();
     }
-
-    
 }
