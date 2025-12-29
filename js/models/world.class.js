@@ -42,13 +42,9 @@ class World {
         this.level.enemies.forEach((enemy) => {
                 if(this.character.isColliding(enemy) && enemy.energy !== 0){
                     this.character.hit();
-                    console.log('eenergy ',enemy.energy);
                     this.statusBar.setPercentage(this.character.energy);
                 }else if(this.character.isOnChicken(enemy)){
-                    enemy.energy= 0;
-                    console.log(enemy.energy);
-                    console.log(this.character.speedY);
-                    console.log('chickn is dead');
+                    enemy.energy = 0;
                 }
             });
     }
