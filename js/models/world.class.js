@@ -50,7 +50,7 @@ class World {
     checkCollisions() {
         this.collidingWithEnemy();
         this.collectingCoins();
-        this.bottleColliding();
+        this.collectingBottles();
         this.checkBottleHitsEndboss();
     }
 
@@ -147,7 +147,8 @@ class World {
         });
     }
 
-    bottleColliding() {
+    collectingBottles() {
+        if(this.bottleCount < 5)
         this.level.bottles = this.level.bottles.filter((bottle) => {
             if (this.character.isColliding(bottle)) {
                 this.bottleCount++;
