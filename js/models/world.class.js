@@ -7,6 +7,7 @@ class World {
     statusBar = new StatusBar();
     coinBar = new CoinBar();
     bottleBar = new BottleBar();
+    endbossBar = new EndbossBar(this.enemies.find(e => e instanceof Endboss));
     throwableObjects = [];
     coinCount = 0;
     bottleCount = 0;
@@ -38,46 +39,26 @@ class World {
 
     }
 
-    run(){
+    run() {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        },100);
+        }, 100);
     }
 
-    checkCollisions(){
-        this.level.enemies.forEach((enemy) => {
-                if(this.character.isColliding(enemy) && enemy.energy !== 0){
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy);
-                }else if(this.character.isOnChicken(enemy)){
-                    enemy.energy = 0;
-                }
-            });
-        this.level.coins = this.level.coins.filter((coin) => {
-            if(this.character.isColliding(coin)){
-                this.coinCount++;
-                this.coinBar.setPercentage(this.coinCount * 20); 
-                return false;
-            }
-            return true; 
-        });
-        this.level.bottles = this.level.bottles.filter((bottle) => {
-            if(this.character.isColliding(bottle)){
-                this.bottleCount++;
-                this.bottleBar.setPercentage(this.bottleCount * 20); 
-                return false;
-            }
-            return true; 
-        });
+    checkCollisions() {
+        this.collidingWithEnemy();
+        this.collectingCoins();
+        this.bottleColliding();
+        this.checkBottleHitsEndboss();
     }
 
-    checkThrowObjects(){
-        if(this.keyboard.D && this.bottleCount > 0){
-            let bottle = new ThrowableObject(this.character.x,this.character.y);
+    checkThrowObjects() {
+        if (this.keyboard.D && this.bottleCount > 0) {
+            let bottle = new ThrowableObject(this.character.x, this.character.y);
             this.throwableObjects.push(bottle);
             this.bottleCount--;
-            this.bottleBar.setPercentage(this.bottleCount*20);
+            this.bottleBar.setPercentage(this.bottleCount * 20);
         }
     }
 
@@ -94,6 +75,8 @@ class World {
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0);
+
+        this.addToMap(this.endbossBar);
 
 
         this.addObjectsToMap(this.level.enemies);
@@ -138,6 +121,56 @@ class World {
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
+        });
+    }
+
+    collidingWithEnemy() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy) && enemy.energy !== 0) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            } else if (this.character.isOnChicken(enemy)) {
+                enemy.energy = 0;
+            }
+        });
+    }
+
+    collectingCoins() {
+        this.level.coins = this.level.coins.filter((coin) => {
+            if (this.character.isColliding(coin)) {
+                this.coinCount++;
+                this.coinBar.setPercentage(this.coinCount * 20);
+                return false;
+            }
+            return true;
+        });
+    }
+
+    bottleColliding() {
+        this.level.bottles = this.level.bottles.filter((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                this.bottleCount++;
+                this.bottleBar.setPercentage(this.bottleCount * 20);
+                return false;
+            }
+            return true;
+        });
+    }
+
+    checkBottleHitsEndboss() {
+        const endboss = this.enemies.find(e => e instanceof Endboss);
+        if (!endboss) return;
+        this.throwableObjects = this.throwableObjects.filter(bottle => {
+            if (bottle.isSplashed) return false;
+            if (bottle.isColliding(endboss)) {
+                endboss.energy -= 20;
+                if (endboss.energy < 0) endboss.energy = 0;
+                this.endbossBar.setPercentage(endboss.energy);
+                bottle.isSplashed = true;
+                if (typeof bottle.startSplashAnimation === 'function') bottle.startSplashAnimation();
+                return false;
+            }
+            return true;
         });
     }
 }
