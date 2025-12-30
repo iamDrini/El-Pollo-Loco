@@ -1,6 +1,5 @@
 class World {
     character = new Character();
-    //coins = level1.coins;
     level = level1;
     enemies = level1.enemies;
     clouds = level1.clouds;
@@ -8,6 +7,7 @@ class World {
     statusBar = new StatusBar();
     coinBar = new CoinBar();
     throwableObjects = [];
+    coinCount = 0;
 
     canvas;
     ctx;
@@ -48,6 +48,14 @@ class World {
                     enemy.energy = 0;
                 }
             });
+        this.level.coins = this.level.coins.filter((coin) => {
+            if(this.character.isColliding(coin)){
+                this.coinCount++;
+                this.coinBar.setPercentage(this.coinCount * 20); 
+                return false;
+            }
+            return true; 
+        });
     }
 
     checkThrowObjects(){

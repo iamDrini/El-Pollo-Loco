@@ -1,5 +1,4 @@
 class CollactableObject extends MovableObject{
-    counter;
 
     constructor(){
         super();
