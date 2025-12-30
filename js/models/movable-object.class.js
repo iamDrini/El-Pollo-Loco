@@ -33,7 +33,7 @@ class MovableObject extends DrawableObject {
 
     //character.isColliding(chicken)
     isColliding(mo) {
-        return this.x + this.width -10> mo.x &&
+        return this.x + this.width - 10 > mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height
@@ -43,11 +43,14 @@ class MovableObject extends DrawableObject {
     //character.jumpOnChicken
     isOnChicken(mo) {
         return this.x < mo.x + mo.width &&
-            this.x + this.width-25> mo.x &&
+            this.x + this.width - 25 > mo.x &&
             this.y + this.height < mo.y &&
             this.speedY < -7;
     }
 
+    isReachable(endboss) {
+        return Math.abs(this.x - endboss.x) <= 500;
+    }
 
     hit() {
         this.energy -= 5;

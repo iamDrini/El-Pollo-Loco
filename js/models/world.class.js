@@ -28,6 +28,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.enemies.find(e=>e instanceof Endboss).world = this;
         this.level.coins.forEach(coin => {
             coin.world = this;
             coin.initPosition();
