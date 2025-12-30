@@ -6,8 +6,10 @@ class World {
     backgroundObjects = level1.backgroundObjects;
     statusBar = new StatusBar();
     coinBar = new CoinBar();
+    bottleBar = new BottleBar();
     throwableObjects = [];
     coinCount = 0;
+    bottleCount = 0;
 
     canvas;
     ctx;
@@ -28,6 +30,10 @@ class World {
         this.level.coins.forEach(coin => {
             coin.world = this;
             coin.initPosition();
+        });
+        this.level.bottles.forEach(bottle => {
+            bottle.world = this;
+            bottle.initPosition();
         });
 
     }
@@ -56,12 +62,22 @@ class World {
             }
             return true; 
         });
+        this.level.bottles = this.level.bottles.filter((bottle) => {
+            if(this.character.isColliding(bottle)){
+                this.bottleCount++;
+                this.bottleBar.setPercentage(this.bottleCount * 20); 
+                return false;
+            }
+            return true; 
+        });
     }
 
     checkThrowObjects(){
-        if(this.keyboard.D){
+        if(this.keyboard.D && this.bottleCount > 0){
             let bottle = new ThrowableObject(this.character.x,this.character.y);
             this.throwableObjects.push(bottle);
+            this.bottleCount--;
+            this.bottleBar.setPercentage(this.bottleCount*20);
         }
     }
 
@@ -76,11 +92,13 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
+        this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0);
 
 
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.bottles);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);

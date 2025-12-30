@@ -17,3 +17,5 @@ class ThrowableObject extends CollactableObject{
         }, 25);
     }
 }
+//nur für die Flaschen zum Werfen!
+//Für einsammeln und zeigen Klasse bottles verwenden
