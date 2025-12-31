@@ -50,6 +50,10 @@ h1{
     letter-spacing: 3px;
     text-shadow: 6px 6px 4px rgba(0,0,0,0.5)
 }
+
+button:hover{
+    cursor: pointer;
+}
 @media only screen and (max-width: 720px){
     canvas{
         width: 100%;
