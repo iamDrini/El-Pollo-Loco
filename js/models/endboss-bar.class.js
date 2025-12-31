@@ -20,8 +20,10 @@ class EndbossBar extends DrawableObject{
     }
 
     draw(ctx) {
-         this.x = this.endboss.x + 50;
-         super.draw(ctx);
+            if (this.endboss.energy > 0) {
+                this.x = this.endboss.x + 50;
+                super.draw(ctx);
+            }
     }
 
     setPercentage(percentage) {
