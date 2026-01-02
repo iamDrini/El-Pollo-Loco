@@ -28,13 +28,26 @@
     <script src="js/game.js"></script>
 </head>
 
-<body onload="init()">
+<body>
 
     <h1>El Pollo Loco</h1>
     <div class="canvas-container">
         <canvas id="canvas" width="720" height="480"></canvas>
+        <div class="start-screen">
+            <div class="start-screen-container">
+                <button class="start-screen-btn">
+                    <span>START</span>
+                </button>
+                <button class="start-screen-btn">
+                    <span>CONTROLS</span>
+                </button>
+            </div>
+        </div>
         <button onclick="fullscreen()" class="fullscreen-btn">
             <img src="img/expand.png" alt="Fullscreen" />
+        </button>
+        <button class="mute-btn">
+            <img src="img/speaker.png">
         </button>
     </div>
 

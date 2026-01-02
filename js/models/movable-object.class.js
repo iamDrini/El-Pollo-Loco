@@ -45,7 +45,7 @@ class MovableObject extends DrawableObject {
         return this.x < mo.x + mo.width &&
             this.x + this.width - 25 > mo.x &&
             this.y + this.height < mo.y &&
-            this.speedY < -7;
+            this.speedY < -10;
     }
 
     isReachable(endboss) {
