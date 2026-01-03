@@ -67,7 +67,7 @@ class Endboss extends MovableObject{
                 this.applyGravityDead();
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
-            }else if(this.isReachable(this.world.character)){
+            }else if(this.world && this.isReachable(this.world.character)){
                 this.playAnimation(this.IMAGES_ALERT);
             }else {
                     //walk animation

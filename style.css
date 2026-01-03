@@ -42,14 +42,21 @@ canvas{
     display:flex;
     justify-content: space-around;
     align-items: center;
-    padding: 24px;
+    padding: 48px;
 }
 
 .start-screen-btn{
-    width: 110px;
+    width: 160px;
     height: 40px;
     display: flex;
     border-style: none;
+    border-radius: 10px;
+    background-color: #ffa503;
+    font-family: 'zabars', Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 3px;
 }
 
 .start-screen-btn img{
