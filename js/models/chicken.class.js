@@ -20,8 +20,7 @@ class Chicken extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
         this.energy = 5;
-        //Koordinaten der Hünchen um sie etwas weiter hinten zu platzieren
-        this.x = 400 + 400 * Math.random();
+        this.x = 400 + 2500 * Math.random();
         this.speed = 2 + Math.random() * 0.25;
         this.animate();
     }
