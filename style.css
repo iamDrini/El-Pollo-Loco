@@ -113,6 +113,31 @@ h1{
     text-shadow: 6px 6px 4px rgba(0,0,0,0.5)
 }
 
+.control-container{
+    display: flex;
+    gap: 20px;
+    font-size: 40px;
+    justify-content: space-between;
+    width: 720px;
+}
+.control-content{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+    gap: 16px;
+}
+
+.control-content img{
+    height: 40px;
+    width: 40px;
+}
+
+.span-d{
+    font-size: 40px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 button:hover{
     cursor: pointer;
 }
