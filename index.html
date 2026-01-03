@@ -34,12 +34,20 @@
     <h1>El Pollo Loco</h1>
     <div class="canvas-container">
         <canvas id="canvas" width="720" height="480"></canvas>
-        <div class="start-screen">
+        <div id="start-screen" class="start-screen">
             <div class="start-screen-container">
-                <button class="start-screen-btn">
+                <button onclick="startGame()" class="start-screen-btn">
                     <span>START</span>
                 </button>
             </div>
+        </div>
+        <div id="game-over-screen" class="game-over-screen">
+            <img src="img/You won, you lost/Game over A.png">
+            <button onclick="restartGame()">RESTART</button>
+        </div>
+        <div id="game-win-screen" class="game-over-screen">
+            <img src="img/You won, you lost/You Win A.png">
+            <button onclick="restartGame()">RESTART</button>
         </div>
         <button onclick="fullscreen()" class="fullscreen-btn">
             <img src="img/expand.png" alt="Fullscreen" />

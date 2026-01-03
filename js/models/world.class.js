@@ -11,6 +11,7 @@ class World {
     throwableObjects = [];
     coinCount = 0;
     bottleCount = 0;
+    endboss = this.enemies.find(e => e instanceof Endboss);
 
     canvas;
     ctx;
@@ -28,7 +29,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.enemies.find(e=>e instanceof Endboss).world = this;
+        this.enemies.find(e => e instanceof Endboss).world = this;
         this.level.coins.forEach(coin => {
             coin.world = this;
             coin.initPosition();
@@ -64,7 +65,20 @@ class World {
     }
 
     draw() {
-        //Clear Canvas
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const gameWinScreen = document.getElementById('game-win-screen');
+        if (this.character.isDead() && !window.gameIsRestarting) {
+            gameOverScreen.style.display = 'flex';
+            this.addToMap(this.character);
+        } else {
+            gameOverScreen.style.display = 'none';
+        }
+        if (this.endboss.isDead() && !window.gameIsRestarting) {
+            gameWinScreen.style.display = 'flex';
+            this.allEnemiesDead();
+        } else {
+            gameWinScreen.style.display = 'none';
+        }
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -76,9 +90,8 @@ class World {
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0);
-        
-        this.addToMap(this.endbossBar);
 
+        this.addToMap(this.endbossBar);
 
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
@@ -89,12 +102,11 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0);
 
-
-        //Draw() wird in Schleife aufgerufen
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
+
     }
 
     addToMap(mo) {
@@ -147,15 +159,15 @@ class World {
     }
 
     collectingBottles() {
-        if(this.bottleCount < 5)
-        this.level.bottles = this.level.bottles.filter((bottle) => {
-            if (this.character.isColliding(bottle)) {
-                this.bottleCount++;
-                this.bottleBar.setPercentage(this.bottleCount * 20);
-                return false;
-            }
-            return true;
-        });
+        if (this.bottleCount < 5)
+            this.level.bottles = this.level.bottles.filter((bottle) => {
+                if (this.character.isColliding(bottle)) {
+                    this.bottleCount++;
+                    this.bottleBar.setPercentage(this.bottleCount * 20);
+                    return false;
+                }
+                return true;
+            });
     }
 
     checkBottleHitsEndboss() {
@@ -172,6 +184,12 @@ class World {
                 return false;
             }
             return true;
+        });
+    }
+
+    allEnemiesDead(){
+        this.level.enemies.forEach(enemy => {
+            enemy.energy = 0;
         });
     }
 }
