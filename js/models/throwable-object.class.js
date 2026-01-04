@@ -37,7 +37,7 @@ class ThrowableObject extends CollactableObject {
     }
 
     animate() {
-        const groundLevel = 450;
+        const groundLevel = 440;
         this.animateInterval = setInterval(() => {
             if (!this.isSplashed && this.y + this.height >= groundLevel) {
                 this.y = groundLevel - this.height;
@@ -45,7 +45,7 @@ class ThrowableObject extends CollactableObject {
                 this.speedY = 0;
                 this.startSplashAnimation();
             }
-        }, 50);
+        }, 10);
     }
 
     startSplashAnimation() {
@@ -59,7 +59,7 @@ class ThrowableObject extends CollactableObject {
             } else {
                 clearInterval(this.splashInterval);
             }
-        }, 500);
+        }, 10);
         this.salsaThrow.currentTime = 0.3;
         this.salsaThrow.play();
     }
