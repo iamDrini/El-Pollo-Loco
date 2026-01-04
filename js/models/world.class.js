@@ -12,6 +12,8 @@ class World {
     coinCount = 0;
     bottleCount = 0;
     endboss = this.enemies.find(e => e instanceof Endboss);
+    bossHurtSound = new Audio('audio/boss_hurt.mp3');
+    characterHurtSound = new Audio('audio/character_hurt.mp3');
 
     canvas;
     ctx;
@@ -140,6 +142,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.energy !== 0) {
                 this.character.hit();
+                this.characterHurtSound.play();
                 this.statusBar.setPercentage(this.character.energy);
             } else if (this.character.isOnChicken(enemy)) {
                 enemy.energy = 0;
@@ -176,6 +179,7 @@ class World {
         this.throwableObjects = this.throwableObjects.filter(bottle => {
             if (bottle.isSplashed) return false;
             if (bottle.isColliding(endboss)) {
+                this.bossHurtSound.play();
                 endboss.energy -= 20;
                 if (endboss.energy < 0) endboss.energy = 0;
                 this.endbossBar.setPercentage(endboss.energy);

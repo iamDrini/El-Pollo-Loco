@@ -1,4 +1,5 @@
 class ThrowableObject extends CollactableObject {
+    salsaThrow = new Audio('audio/salsa_hit.mp3');
     isAboveGround() {
         return !this.isSplashed;
     }
@@ -58,6 +59,8 @@ class ThrowableObject extends CollactableObject {
             } else {
                 clearInterval(this.splashInterval);
             }
-        }, 60);
+        }, 500);
+        this.salsaThrow.currentTime = 0.3;
+        this.salsaThrow.play();
     }
 }

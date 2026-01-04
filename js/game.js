@@ -1,6 +1,9 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+const jumpSound = new Audio('audio/jump.mp3');
+const walkSound = new Audio('audio/walk.mp3');
+
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -11,9 +14,11 @@ function init() {
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
+        walkSound.play();
     }
     if (e.keyCode == 37) {
         keyboard.LEFT = true;
+        walkSound.play();
     }
     if (e.keyCode == 38) {
         keyboard.UP = true;
@@ -23,20 +28,23 @@ window.addEventListener('keydown', (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
+        jumpSound.play();
+        walkSound.pause();
     }
     if (e.keyCode == 68) {
         keyboard.D = true;
     }
-    
 
 });
 
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
+        walkSound.pause();
     }
     if (e.keyCode == 37) {
         keyboard.LEFT = false;
+        walkSound.pause();
     }
     if (e.keyCode == 38) {
         keyboard.UP = false;

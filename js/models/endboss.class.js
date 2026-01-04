@@ -70,7 +70,6 @@ class Endboss extends MovableObject{
             }else if(this.world && this.isReachable(this.world.character)){
                 this.playAnimation(this.IMAGES_ALERT);
             }else {
-                    //walk animation
                     this.playAnimation(this.IMAGES_WALKING);
                     this.moveLeft();
             }
