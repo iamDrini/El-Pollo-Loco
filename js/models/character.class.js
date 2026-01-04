@@ -55,6 +55,19 @@ class Character extends MovableObject {
         'img/2_character_pepe/4_hurt/H-43.png'
     ];
 
+    IMAGES_SLEEPING = [
+        'img/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png'
+    ]
+
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_IDLE);
@@ -62,6 +75,8 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_SLEEPING);
+        
         this.applyGravity();
         this.animate();
     }
@@ -82,21 +97,27 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
+        let lastMoveTime = Date.now();
         setInterval(() => {
+            // Bewegungserkennung
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.SPACE) {
+                lastMoveTime = Date.now();
+            }
 
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.applyGravityDead();
-            }else if(this.isHurt()){
+            } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }
-            else if (this.isAboveGround()) {
+            } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
+            } else if (Date.now() - lastMoveTime > 10000) {
+                this.playAnimation(this.IMAGES_SLEEPING);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     //walk animation
                     this.playAnimation(this.IMAGES_WALKING);
-                }else{
+                } else {
                     this.playAnimation(this.IMAGES_IDLE);
                 }
             }
