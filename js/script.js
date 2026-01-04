@@ -42,9 +42,9 @@ function restartGame(){
 function updateMuteOverlay() {
         const muteRef = document.getElementById('mute-btn');
         if (window.isMuted) {
-            
+            muteRef.classList.remove('mute-overlay');
         } else {
-            
+            muteRef.classList.add('mute-overlay')
         }
     }
 

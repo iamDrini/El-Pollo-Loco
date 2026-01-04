@@ -1,13 +1,9 @@
-/* 
+
 .mute-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(80,80,80,0.45);
-    z-index: 4000;
-} */
+
+    background: rgba(80,80,80,0.45) !important;
+    border-radius: 10px;
+} 
 .d-none{
     display:none;
 }
@@ -148,7 +144,7 @@ canvas{
     border: none;
     cursor: pointer;
     z-index: 5000;
-    padding: 0;
+    padding: 2px;
 }
 .mute-btn img{
     width: 100%;
