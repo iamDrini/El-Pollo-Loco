@@ -1,4 +1,11 @@
 
+
+window.isMuted = false;
+
+function toggleMute() {
+    window.isMuted = !window.isMuted;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const gameOverScreen = document.getElementById('game-over-screen');
     const gameWinScreen = document.getElementById('game-win-screen');
@@ -12,12 +19,12 @@ backgroundMusic.volume = 0.5;
 
 function startGame(){
     window.gameIsRestarting = false;
-    console.log(window.gameIsRestarting);
     const startScreen = document.querySelector('.start-screen');
     const gameOverScreen = document.getElementById('game-over-screen');
     gameOverScreen.style.display = 'none';
     startScreen.style.display = 'none';
     backgroundMusic.currentTime = 0;
+    if (!window.isMuted)
     backgroundMusic.play();
     init();
 }
@@ -25,10 +32,23 @@ function startGame(){
 
 function restartGame(){
     window.gameIsRestarting = true;
-    console.log(window.gameIsRestarting);
     backgroundMusic.pause();
     const gameOverScreen = document.getElementById('game-over-screen');
     const startScreen = document.getElementById('start-screen');
     gameOverScreen.style.display = 'none';
     startScreen.style.display = 'block';
 }
+
+function updateMuteOverlay() {
+        const muteRef = document.getElementById('mute-btn');
+        if (window.isMuted) {
+            
+        } else {
+            
+        }
+    }
+
+document.addEventListener('DOMContentLoaded', updateMuteOverlay);
+
+
+

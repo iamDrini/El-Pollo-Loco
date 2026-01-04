@@ -61,6 +61,7 @@ class ThrowableObject extends CollactableObject {
             }
         }, 10);
         this.salsaThrow.currentTime = 0.3;
+        if (!window.isMuted)
         this.salsaThrow.play();
     }
 }

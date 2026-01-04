@@ -1,3 +1,13 @@
+/* 
+.mute-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(80,80,80,0.45);
+    z-index: 4000;
+} */
 .d-none{
     display:none;
 }
@@ -137,7 +147,7 @@ canvas{
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 5000;
     padding: 0;
 }
 .mute-btn img{

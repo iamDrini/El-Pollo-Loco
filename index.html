@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>El Pollo Loco</title>
     <link rel="stylesheet" href="style.css">
+    <script src="js/script.js"></script>
     <script src="js/models/drawable-object.class.js"></script>
     <script src="js/models/movable-object.class.js"></script>
     <script src="js/models/collactable-object.js"></script>
@@ -26,7 +27,6 @@
     <script src="js/models/endboss-bar.class.js"></script>
     <script src="js/models/world.class.js"></script>
     <script src="js/game.js"></script>
-    <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -38,6 +38,9 @@
             <div class="start-screen-container">
                 <button onclick="startGame()" class="start-screen-btn">
                     <span>START</span>
+                </button>
+                <button onclick="toggleMute()" id="mute-btn" class="mute-btn">
+                    <img src="img/speaker.png">
                 </button>
             </div>
         </div>
@@ -52,30 +55,27 @@
         <button onclick="fullscreen()" class="fullscreen-btn">
             <img src="img/expand.png" alt="Fullscreen" />
         </button>
-        <button class="mute-btn">
-            <img src="img/speaker.png">
-        </button>
     </div>
-    
-                <div class="control-container">
-                    <div class="control-content">
-                        <img class="arrow-img" src="img/left.png">
-                        <span>walk left</span>
-                    </div>
-                    <div class="control-content">
-                        <img class="arrow-img" src="img/right.png">
-                        <span>walk right</span>
-                    </div>
-                    <div class="control-content">
-                        <img class="space-img" src="img/space-bar.png">
-                        <span>jump</span>
-                    </div>
-                    <div class="control-content">
-                        <span class="span-d">D</span>
-                        <span>throw bottle</span>
-                    </div>
-                </div>
-            
+
+    <div class="control-container">
+        <div class="control-content">
+            <img class="arrow-img" src="img/left.png">
+            <span>walk left</span>
+        </div>
+        <div class="control-content">
+            <img class="arrow-img" src="img/right.png">
+            <span>walk right</span>
+        </div>
+        <div class="control-content">
+            <img class="space-img" src="img/space-bar.png">
+            <span>jump</span>
+        </div>
+        <div class="control-content">
+            <span class="span-d">D</span>
+            <span>throw bottle</span>
+        </div>
+    </div>
+
 
 </body>
 

@@ -49,7 +49,7 @@ class MovableObject extends DrawableObject {
     }
 
     isReachable(endboss) {
-        return this.x - endboss.x <= 300;
+        return this.x - endboss.x <= 450;
     }
 
     hit() {

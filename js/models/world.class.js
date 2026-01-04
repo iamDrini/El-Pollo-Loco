@@ -142,6 +142,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.energy !== 0) {
                 this.character.hit();
+                if (!window.isMuted)
                 this.characterHurtSound.play();
                 this.statusBar.setPercentage(this.character.energy);
             } else if (this.character.isOnChicken(enemy)) {
@@ -179,6 +180,7 @@ class World {
         this.throwableObjects = this.throwableObjects.filter(bottle => {
             if (bottle.isSplashed) return false;
             if (bottle.isColliding(endboss)) {
+                if (!window.isMuted)
                 this.bossHurtSound.play();
                 endboss.energy -= 20;
                 if (endboss.energy < 0) endboss.energy = 0;

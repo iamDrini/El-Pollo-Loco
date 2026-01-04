@@ -14,10 +14,12 @@ function init() {
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
+        if (!window.isMuted)
         walkSound.play();
     }
     if (e.keyCode == 37) {
         keyboard.LEFT = true;
+        if (!window.isMuted)
         walkSound.play();
     }
     if (e.keyCode == 38) {
@@ -28,6 +30,7 @@ window.addEventListener('keydown', (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
+        if (!window.isMuted)
         jumpSound.play();
         walkSound.pause();
     }
