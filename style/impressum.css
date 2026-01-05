@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    padding: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+    color: #222;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 32px;
+}
+
+p {
+    margin-bottom: 16px;
+}
+
+a {
+    word-break: break-all;
+    color: #555;
+    text-decoration: none;
+}
