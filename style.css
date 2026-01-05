@@ -1,3 +1,23 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-image: url(img/5_background/desert-7190568_1920.png);
+    background-position: center ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    font-family: 'zabars', Arial, Helvetica, sans-serif;
+    margin:0;
+}
+
+a{
+    text-decoration: none;
+    color: grey;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 .mute-overlay {
 
@@ -39,19 +59,6 @@
 
 .game-over-screen button:hover{
     transform: scale(1.1);
-}
-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: url(img/5_background/desert-7190568_1920.png);
-    background-position: center ;
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-    font-family: 'zabars', Arial, Helvetica, sans-serif;
-    margin:0;
 }
 
 .canvas-container {
@@ -189,6 +196,12 @@ h1{
 button:hover{
     cursor: pointer;
 }
+
+footer{
+    width:100%;
+    display:flex;
+    justify-content: center;
+}
 @media only screen and (max-width: 720px){
     canvas{
         width: 100%;
@@ -200,6 +213,12 @@ button:hover{
         height: 100vh;
     }
     h1{
+        display:none;
+    }
+    footer{
+        display:none;
+    }
+    .control-container{
         display:none;
     }
 }
@@ -222,7 +241,7 @@ button:hover{
     left:0;
     bottom:0;
     width:100%;
-    display:flex;
+    display:none;
     justify-content: space-evenly;
 }
 
@@ -251,6 +270,17 @@ button:hover{
     }
 
     .canvas-container {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) and (orientation: landscape) {
+    .mobile-btn-container {
+        display: flex;
+    }
+
+
+    #rotate-overlay {
         display: none;
     }
 }
