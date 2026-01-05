@@ -32,9 +32,23 @@
 
 <body>
 
+    <div id="rotate-overlay">
+        <p>Turn your device to play</p>
+    </div>
+
     <h1>El Pollo Loco</h1>
     <div class="canvas-container">
         <canvas id="canvas" width="720" height="480"></canvas>
+        <div class="mobile-btn-container">
+            <div>
+                <button id="btn-left" class="mobile-btn"><img src="img/left.png"></button>
+                <button id="btn-right" class="mobile-btn"><img src="img/right.png"></button>
+            </div>
+            <div>
+                <button id="btn-up" class="mobile-btn"><img src="img/arrow-up.png"></button>
+                <button id="salsa-btn" class="mobile-btn"><img src="img/6_salsa_bottle/salsa_bottle.png"></button>
+            </div>
+        </div>
         <div id="start-screen" class="start-screen">
             <div class="start-screen-container">
                 <button onclick="startGame()" class="start-screen-btn">

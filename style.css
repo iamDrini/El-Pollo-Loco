@@ -203,3 +203,54 @@ button:hover{
         display:none;
     }
 }
+
+#rotate-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: #fff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    z-index: 9999;
+    text-align: center;
+}
+
+.mobile-btn-container{
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    display:flex;
+    justify-content: space-evenly;
+}
+
+.mobile-btn{
+    height:70px;
+    width: 70px;
+    border-radius: 50%;
+    border-style: none;
+    /*rgba(192, 187, 187, 0.4);*/
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    margin: 20px;
+    touch-action:none;
+    user-select: none;
+}
+.mobile-btn img{
+    height: 70%;
+    width: 70%;
+}
+
+
+
+@media screen and (max-width: 900px) and (orientation: portrait) {
+    #rotate-overlay {
+        display: flex;
+    }
+
+    .canvas-container {
+        display: none;
+    }
+}

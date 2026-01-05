@@ -64,6 +64,41 @@ window.addEventListener('keyup', (e) => {
 
 });
 
+function bindMobileButton(buttonId, keyName, onPressSound = null) {
+    const btn = document.getElementById(buttonId);
+
+    btn.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        keyboard[keyName] = true;
+
+        if (onPressSound && !window.isMuted) {
+            onPressSound.play();
+        }
+    });
+
+    btn.addEventListener('pointerup', (e) => {
+        e.preventDefault();
+        keyboard[keyName] = false;
+
+        if (onPressSound) {
+            onPressSound.pause();
+        }
+    });
+
+    btn.addEventListener('pointerleave', () => {
+        keyboard[keyName] = false;
+        if (onPressSound) onPressSound.pause();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    bindMobileButton('btn-right', 'RIGHT', walkSound);
+    bindMobileButton('btn-left', 'LEFT', walkSound);
+    bindMobileButton('btn-up', 'SPACE', jumpSound);
+    bindMobileButton('salsa-btn', 'D');
+});
+
+
 function fullscreen(){
     let fullscreen = document.getElementById('canvas');
     enterFullscreen(fullscreen);
