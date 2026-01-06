@@ -36,7 +36,7 @@ a {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .game-over-screen {
@@ -220,6 +220,11 @@ footer {
     justify-content: center;
 }
 
+footer button{
+    border-style: none;
+    background: transparent;
+}
+
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
@@ -284,6 +289,61 @@ footer {
     width: 70%;
 }
 
+.modal-impressum{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+.content-impressum{
+    background: #fff;
+    border-radius: 16px;
+    padding: 64px 48px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    max-width: 720px;
+    width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+}
+
+.content-impressum::-webkit-scrollbar{
+    display:none;
+}
+
+.close-modal-btn{
+    position: absolute;
+    right: 40px;
+    top:40px;
+    font-size: 36px;
+    width: 40px;
+    height: 40px;
+    padding:5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: none;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.close-modal-btn:hover{
+    background: rgba(210,210,210,0.5);
+}
+
+
+.close-modal-btn img{
+    width: 80%;
+    height: 80%;
+}
 
 
 @media screen and (max-width: 900px) and (orientation: portrait) {

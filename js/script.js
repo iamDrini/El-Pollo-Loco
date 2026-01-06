@@ -53,5 +53,9 @@ function updateMuteOverlay() {
 
 document.addEventListener('DOMContentLoaded', updateMuteOverlay);
 
-
+function toggleImpressum(event){
+    event.stopPropagation();
+    const impRef = document.getElementById('modal-imp');
+    impRef.classList.toggle('d-none');
+}
 
