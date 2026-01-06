@@ -57,12 +57,16 @@ class World {
         this.checkBottleHitsEndboss();
     }
 
+    lastBottleThrow = 0;
+
     checkThrowObjects() {
-        if (this.keyboard.D && this.bottleCount > 0) {
+        const now = Date.now();
+        if (this.keyboard.D && this.bottleCount > 0 && now - this.lastBottleThrow > 1000) {
             let bottle = new ThrowableObject(this.character.x, this.character.y);
             this.throwableObjects.push(bottle);
             this.bottleCount--;
             this.bottleBar.setPercentage(this.bottleCount * 20);
+            this.lastBottleThrow = now;
         }
     }
 

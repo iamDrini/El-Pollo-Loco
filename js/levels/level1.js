@@ -17,6 +17,16 @@ function initLevel() {
             new Chicken(),
             new Chicken(),
             new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
+            new Chicken(),
             new Endboss(),
         ],
         [
@@ -64,7 +74,15 @@ function initLevel() {
         new Bottle(),
         new Bottle(),
         new Bottle(),
-        new Bottle()
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
+        new Bottle(),
         ]
     );
 
