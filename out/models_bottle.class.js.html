@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: models/bottle.class.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,47 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: models/bottle.class.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Collectable salsa bottle lying on the ground.
+ */
+class Bottle extends CollactableObject {
+    height = 70;
+    width = 70;
 
+    world;
 
-    <h3> </h3>
+    /**
+     * Create a bottle at the default ground position.
+     */
+    constructor() {
+        super().loadImage('img/6_salsa_bottle/1_salsa_bottle_on_ground.png');
+        this.x = 0;
+        this.y = 360;
+    }
 
+    /**
+     * Axis-aligned bounding-box collision check against another object.
+     * @param {MovableObject|CollactableObject} mo - Object to test collision against.
+     * @returns {boolean} True if the bottle overlaps the target.
+     */
+    isColliding(mo) {
+        return this.x &lt; mo.x + mo.width &amp;&amp;
+            this.x + this.width > mo.x &amp;&amp;
+            this.y &lt; mo.y + mo.height;
+    }
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+}</code></pre>
+        </article>
+    </section>
 
 
 

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/throwable-object.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/throwable-object.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Thrown salsa bottle with splash animation and simple physics.
+ */
+class ThrowableObject extends CollactableObject {
+    salsaThrow = new Audio('audio/salsa_hit.mp3');
+
+    /**
+     * A thrown bottle stays 'above ground' until it splashes.
+     * @returns {boolean} True until splash has occurred.
+     */
+    isAboveGround() {
+        return !this.isSplashed;
+    }
+
+    IMAGE_SPLASH = [
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
+    ]
+
+    isSplashed = false;
+
+    /**
+     * Create a throwable bottle at character-relative coordinates and start its motion.
+     * @param {number} x - Initial x-position (typically the character's x).
+     * @param {number} y - Initial y-position (typically the character's y).
+     */
+    constructor(x, y) {
+        super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
+        this.loadImages(this.IMAGE_SPLASH);
+        this.x = x + 50;
+        this.y = y + 100;
+        this.height = 70;
+        this.width = 70;
+        this.throw();
+        this.animate();
+    }
+
+    /**
+     * Impart initial velocity, apply gravity, and move forward until splash.
+     */
+    throw() {
+        this.speedY = 13;
+        this.applyGravity();
+        this.throwInterval = setInterval(() => {
+            if (!this.isSplashed) {
+                this.x += 15;
+            }
+        }, 25);
+    }
+
+    /**
+     * Detect ground contact to trigger splash animation once.
+     */
+    animate() {
+        const groundLevel = 440;
+        this.animateInterval = setInterval(() => {
+            if (!this.isSplashed &amp;&amp; this.y + this.height >= groundLevel) {
+                this.y = groundLevel - this.height;
+                this.isSplashed = true;
+                this.speedY = 0;
+                this.startSplashAnimation();
+            }
+        }, 10);
+    }
+
+    /**
+     * Play splash sprite sequence and sound once the bottle hits the ground.
+     */
+    startSplashAnimation() {
+        this.currentImage = 0;
+        let splashIndex = 0;
+        this.splashInterval = setInterval(() => {
+            if (splashIndex &lt; this.IMAGE_SPLASH.length) {
+                let path = this.IMAGE_SPLASH[splashIndex];
+                this.img = this.imageCache[path];
+                splashIndex++;
+            } else {
+                clearInterval(this.splashInterval);
+            }
+        }, 10);
+        this.salsaThrow.currentTime = 0.3;
+        if (!window.isMuted)
+        this.salsaThrow.play();
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BackgroundObject.html">BackgroundObject</a></li><li><a href="Bottle.html">Bottle</a></li><li><a href="BottleBar.html">BottleBar</a></li><li><a href="Character.html">Character</a></li><li><a href="Chick.html">Chick</a></li><li><a href="Chicken.html">Chicken</a></li><li><a href="Cloud.html">Cloud</a></li><li><a href="Coin.html">Coin</a></li><li><a href="CoinBar.html">CoinBar</a></li><li><a href="CollactableObject.html">CollactableObject</a></li><li><a href="DrawableObject.html">DrawableObject</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="EndbossBar.html">EndbossBar</a></li><li><a href="Keyboard.html">Keyboard</a></li><li><a href="Level.html">Level</a></li><li><a href="MovableObject.html">MovableObject</a></li><li><a href="StatusBar.html">StatusBar</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#bindMobileButton">bindMobileButton</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#fullscreen">fullscreen</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#restartGame">restartGame</a></li><li><a href="global.html#setKeyState">setKeyState</a></li><li><a href="global.html#startGame">startGame</a></li><li><a href="global.html#toggleImpressum">toggleImpressum</a></li><li><a href="global.html#toggleMute">toggleMute</a></li><li><a href="global.html#updateMuteOverlay">updateMuteOverlay</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Tue Jan 06 2026 13:45:21 GMT+0100 (Central European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
