@@ -1,9 +1,12 @@
 
 
-window.isMuted = false;
+
+// Initialwert aus Local Storage laden
+window.isMuted = localStorage.getItem('isMuted') === 'true';
 
 function toggleMute() {
     window.isMuted = !window.isMuted;
+    localStorage.setItem('isMuted', window.isMuted);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -42,9 +45,9 @@ function restartGame(){
 function updateMuteOverlay() {
         const muteRef = document.getElementById('mute-btn');
         if (window.isMuted) {
-            muteRef.classList.remove('mute-overlay');
+            muteRef.classList.add('mute-overlay');
         } else {
-            muteRef.classList.add('mute-overlay')
+            muteRef.classList.remove('mute-overlay')
         }
     }
 

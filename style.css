@@ -1,18 +1,18 @@
-body{
+body {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     background-image: url(img/5_background/desert-7190568_1920.png);
-    background-position: center ;
+    background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
     font-family: 'zabars', Arial, Helvetica, sans-serif;
-    margin:0;
+    margin: 0;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
     font-size: 16px;
@@ -20,33 +20,46 @@ a{
 }
 
 .mute-overlay {
-
-    background: rgba(80,80,80,0.45) !important;
-    border-radius: 10px;
-} 
-.d-none{
-    display:none;
+    display: block;
 }
+
+.mute-overlay::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -10%;
+    width: 120%;
+    height: 4px;
+    background-color: red;
+    transform: rotate(-45deg);
+    border-radius: 10px;
+}
+
+.d-none {
+    display: none;
+}
+
 .game-over-screen {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0, 0, 0, 0.7);
     display: none;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     z-index: 2000;
 }
+
 .game-over-screen img {
     max-width: 70%;
     max-height: 70%;
     border-radius: 16px;
 }
 
-.game-over-screen button{
+.game-over-screen button {
     font-family: 'zabars', Arial, Helvetica, sans-serif;
     font-size: 32px;
     width: 30%;
@@ -57,7 +70,7 @@ a{
     transition: transform 0.2s ease;
 }
 
-.game-over-screen button:hover{
+.game-over-screen button:hover {
     transform: scale(1.1);
 }
 
@@ -66,15 +79,15 @@ a{
     display: inline-block;
 }
 
-canvas{
+canvas {
     background-color: black;
-    display:block;
+    display: block;
 }
 
-.start-screen{
+.start-screen {
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-image: url("img/9_intro_outro_screens/start/startscreen_1.png");
@@ -82,19 +95,20 @@ canvas{
     background-size: 720px 480px;
     z-index: 1001;
 }
-.start-screen img{
+
+.start-screen img {
     width: 100%;
     height: 100%;
 }
 
-.start-screen-container{
-    display:flex;
+.start-screen-container {
+    display: flex;
     justify-content: space-around;
     align-items: center;
     padding: 48px;
 }
 
-.start-screen-btn{
+.start-screen-btn {
     width: 160px;
     height: 40px;
     display: flex;
@@ -109,11 +123,11 @@ canvas{
     transition: transform 0.2s ease;
 }
 
-.start-screen-btn:hover{
+.start-screen-btn:hover {
     transform: scale(1.1);
 }
 
-.start-screen-btn img{
+.start-screen-btn img {
     width: 100%;
     height: 100%;
 }
@@ -130,6 +144,7 @@ canvas{
     z-index: 1000;
     padding: 0;
 }
+
 .fullscreen-btn img {
     width: 100%;
     height: 100%;
@@ -141,7 +156,7 @@ canvas{
     src: url('fonts/zabars.ttf') format('truetype');
 }
 
-.mute-btn{
+.mute-btn {
     position: absolute;
     right: 15px;
     top: 20px;
@@ -153,21 +168,22 @@ canvas{
     z-index: 5000;
     padding: 2px;
 }
-.mute-btn img{
+
+.mute-btn img {
     width: 100%;
-    height:100%;
+    height: 100%;
     object-fit: contain;
     background: transparent;
     z-index: 9000;
 }
 
-h1{
+h1 {
     font-size: 64px;
     letter-spacing: 3px;
-    text-shadow: 6px 6px 4px rgba(0,0,0,0.5)
+    text-shadow: 6px 6px 4px rgba(0, 0, 0, 0.5)
 }
 
-.control-container{
+.control-container {
     display: flex;
     gap: 20px;
     font-size: 40px;
@@ -175,51 +191,56 @@ h1{
     max-width: 720px;
     width: 100%;
 }
-.control-content{
-    display:flex;
+
+.control-content {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 24px;
     gap: 16px;
 }
 
-.control-content img{
+.control-content img {
     height: 40px;
     width: 40px;
 }
 
-.span-d{
+.span-d {
     font-size: 40px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
-footer{
-    width:100%;
-    display:flex;
+footer {
+    width: 100%;
+    display: flex;
     justify-content: center;
 }
-@media only screen and (max-width: 720px){
-    canvas{
+
+@media only screen and (max-width: 720px) {
+    canvas {
         width: 100%;
     }
 }
 
-@media only screen and (max-height: 480px){
-    canvas{
+@media only screen and (max-height: 480px) {
+    canvas {
         height: 100vh;
     }
-    h1{
-        display:none;
+
+    h1 {
+        display: none;
     }
-    footer{
-        display:none;
+
+    footer {
+        display: none;
     }
-    .control-container{
-        display:none;
+
+    .control-container {
+        display: none;
     }
 }
 
@@ -236,17 +257,17 @@ footer{
     text-align: center;
 }
 
-.mobile-btn-container{
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:100%;
-    display:none;
+.mobile-btn-container {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: none;
     justify-content: space-evenly;
 }
 
-.mobile-btn{
-    height:70px;
+.mobile-btn {
+    height: 70px;
     width: 70px;
     border-radius: 50%;
     border-style: none;
@@ -254,10 +275,11 @@ footer{
     background-color: rgba(0, 0, 0, 0.4);
     padding: 10px;
     margin: 20px;
-    touch-action:none;
+    touch-action: none;
     user-select: none;
 }
-.mobile-btn img{
+
+.mobile-btn img {
     height: 70%;
     width: 70%;
 }
