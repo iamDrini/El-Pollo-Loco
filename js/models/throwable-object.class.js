@@ -1,5 +1,13 @@
+/**
+ * Thrown salsa bottle with splash animation and simple physics.
+ */
 class ThrowableObject extends CollactableObject {
     salsaThrow = new Audio('audio/salsa_hit.mp3');
+
+    /**
+     * A thrown bottle stays 'above ground' until it splashes.
+     * @returns {boolean} True until splash has occurred.
+     */
     isAboveGround() {
         return !this.isSplashed;
     }
@@ -15,6 +23,11 @@ class ThrowableObject extends CollactableObject {
 
     isSplashed = false;
 
+    /**
+     * Create a throwable bottle at character-relative coordinates and start its motion.
+     * @param {number} x - Initial x-position (typically the character's x).
+     * @param {number} y - Initial y-position (typically the character's y).
+     */
     constructor(x, y) {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGE_SPLASH);
@@ -26,6 +39,9 @@ class ThrowableObject extends CollactableObject {
         this.animate();
     }
 
+    /**
+     * Impart initial velocity, apply gravity, and move forward until splash.
+     */
     throw() {
         this.speedY = 13;
         this.applyGravity();
@@ -36,6 +52,9 @@ class ThrowableObject extends CollactableObject {
         }, 25);
     }
 
+    /**
+     * Detect ground contact to trigger splash animation once.
+     */
     animate() {
         const groundLevel = 440;
         this.animateInterval = setInterval(() => {
@@ -48,6 +67,9 @@ class ThrowableObject extends CollactableObject {
         }, 10);
     }
 
+    /**
+     * Play splash sprite sequence and sound once the bottle hits the ground.
+     */
     startSplashAnimation() {
         this.currentImage = 0;
         let splashIndex = 0;

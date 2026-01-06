@@ -1,3 +1,6 @@
+/**
+ * Main controllable character with animations and movement logic.
+ */
 class Character extends MovableObject {
     height = 300;
     width = 140;
@@ -68,6 +71,9 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-20.png'
     ]
 
+    /**
+     * Initialize character sprites, physics, and start animations.
+     */
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_IDLE);
@@ -80,12 +86,18 @@ class Character extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Start continuous movement handling and state-based animations.
+     */
     animate() {
         this.updateMovementAndCamera();
 
         this.updateStateCharacter();
     }
 
+    /**
+     * Poll keyboard input to move the character and update the camera offset.
+     */
     updateMovementAndCamera(){
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -103,6 +115,9 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * Drive character animation states based on movement, inactivity, and health.
+     */
     updateStateCharacter(){
         let lastMoveTime = Date.now();
         setInterval(() => {
@@ -128,5 +143,6 @@ class Character extends MovableObject {
             }
         }, 150);
     }
+    
 
 }

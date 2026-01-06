@@ -1,3 +1,6 @@
+/**
+ * Endboss enemy with multiple animation states and chase behavior.
+ */
 class Endboss extends MovableObject{
 
     height = 400;
@@ -47,6 +50,9 @@ class Endboss extends MovableObject{
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ]
 
+    /**
+     * Initialize the endboss, preload all state images, and start animation loop.
+     */
     constructor(){
         super().loadImage(this.IMAGES_STANDING[0]);
         this.loadImages(this.IMAGES_STANDING);
@@ -58,6 +64,9 @@ class Endboss extends MovableObject{
         this.animate();
     }
 
+    /**
+     * Drive boss animation and movement based on health, hurt state, and proximity to the character.
+     */
     animate(){
         setInterval(() => {
             if (this.isDead()) {

@@ -1,3 +1,6 @@
+/**
+ * Player health status bar that swaps sprites based on current energy.
+ */
 class StatusBar extends DrawableObject {
     IMAGES = [
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png',
@@ -8,6 +11,9 @@ class StatusBar extends DrawableObject {
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png',
     ];
     percentages = 100;
+    /**
+     * Create the health bar at its fixed position and preload images.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
@@ -18,12 +24,20 @@ class StatusBar extends DrawableObject {
         this.setPercentage(100);
     }
 
+    /**
+     * Update displayed health percentage and pick the matching sprite.
+     * @param {number} percentage - Value between 0 and 100 indicating health.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
 
     }
+    /**
+     * Map the current percentage to the corresponding sprite index.
+     * @returns {number} Index within IMAGES for the current health level.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

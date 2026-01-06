@@ -1,9 +1,8 @@
 
-
-
-// Initialwert aus Local Storage laden
+// Global mute state persisted in local storage.
 window.isMuted = localStorage.getItem('isMuted') === 'true';
 
+/** Toggle global mute state and persist it. */
 function toggleMute() {
     window.isMuted = !window.isMuted;
     localStorage.setItem('isMuted', window.isMuted);
@@ -20,6 +19,9 @@ const backgroundMusic = new Audio('audio/background_music.mp3');
 backgroundMusic.loop = true;
 backgroundMusic.volume = 0.5;
 
+/**
+ * Start the game: hide start/over screens, reset music, and init world.
+ */
 function startGame(){
     window.gameIsRestarting = false;
     const startScreen = document.querySelector('.start-screen');
@@ -33,6 +35,9 @@ function startGame(){
 }
 
 
+/**
+ * Restart the game: stop music, hide game over, show start screen.
+ */
 function restartGame(){
     window.gameIsRestarting = true;
     backgroundMusic.pause();
@@ -42,6 +47,9 @@ function restartGame(){
     startScreen.style.display = 'block';
 }
 
+/**
+ * Update the mute button overlay based on mute state.
+ */
 function updateMuteOverlay() {
         const muteRef = document.getElementById('mute-btn');
         if (window.isMuted) {
@@ -53,6 +61,10 @@ function updateMuteOverlay() {
 
 document.addEventListener('DOMContentLoaded', updateMuteOverlay);
 
+/**
+ * Toggle the Impressum modal visibility and stop click bubbling.
+ * @param {Event} event - Click event from the overlay or close button.
+ */
 function toggleImpressum(event){
     event.stopPropagation();
     const impRef = document.getElementById('modal-imp');

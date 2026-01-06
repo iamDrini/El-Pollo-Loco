@@ -1,3 +1,6 @@
+/**
+ * Displays the coin status bar and swaps sprites based on collected coins.
+ */
 class CoinBar extends DrawableObject{
     IMAGES = [
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png',
@@ -9,7 +12,10 @@ class CoinBar extends DrawableObject{
     ];
 
     percentages = 100;
-     constructor() {
+      /**
+        * Create a coin bar at its fixed screen position and preload images.
+        */
+      constructor() {
         super();
         this.loadImages(this.IMAGES);
         this.x = 30;
@@ -19,12 +25,20 @@ class CoinBar extends DrawableObject{
         this.setPercentage(0);
     }
 
+    /**
+     * Update the displayed coin fill percentage and select the matching sprite.
+     * @param {number} percentage - Value between 0 and 100 indicating collected coins.
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
 
     }
+    /**
+     * Map the current percentage to the corresponding sprite index.
+     * @returns {number} Index within IMAGES for the current fill level.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

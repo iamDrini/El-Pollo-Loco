@@ -5,12 +5,18 @@ const jumpSound = new Audio('audio/jump.mp3');
 const walkSound = new Audio('audio/walk.mp3');
 
 
+/**
+ * Initialize canvas, level, and world instance.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     initLevel();
     world = new World(canvas, keyboard);
 }
 
+/**
+ * Handle keydown events to set keyboard state and play sounds.
+ */
 window.addEventListener('keydown', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = true;
@@ -40,6 +46,9 @@ window.addEventListener('keydown', (e) => {
 
 });
 
+/**
+ * Handle keyup events to reset keyboard state and pause sounds.
+ */
 window.addEventListener('keyup', (e) => {
     if (e.keyCode == 39) {
         keyboard.RIGHT = false;
@@ -64,6 +73,12 @@ window.addEventListener('keyup', (e) => {
 
 });
 
+/**
+ * Set a keyboard state flag and manage optional sound playback.
+ * @param {string} keyName - The keyboard property to set.
+ * @param {boolean} isPressed - Whether the key is pressed.
+ * @param {HTMLAudioElement|null} sound - Optional sound to play/pause.
+ */
 function setKeyState(keyName, isPressed, sound) {
     keyboard[keyName] = isPressed;
 
@@ -77,6 +92,12 @@ function setKeyState(keyName, isPressed, sound) {
     }
 }
 
+/**
+ * Bind a mobile button to keyboard flags and optional press sound.
+ * @param {string} buttonId - DOM id of the button element.
+ * @param {string} keyName - Keyboard property to toggle.
+ * @param {HTMLAudioElement|null} onPressSound - Sound to play while pressed.
+ */
 function bindMobileButton(buttonId, keyName, onPressSound = null) {
     const btn = document.getElementById(buttonId);
 
@@ -103,11 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+/** Enter fullscreen for the canvas. */
 function fullscreen(){
     let fullscreen = document.getElementById('canvas');
     enterFullscreen(fullscreen);
 }
 
+/**
+ * Request fullscreen on the given element (cross-browser).
+ * @param {HTMLElement} element - Target element for fullscreen.
+ */
 function enterFullscreen(element) {
   if(element.requestFullscreen) {
     element.requestFullscreen();
@@ -118,6 +144,7 @@ function enterFullscreen(element) {
   }
 }
 
+/** Exit fullscreen if active (cross-browser). */
 function exitFullscreen() {
   if(document.exitFullscreen) {
     document.exitFullscreen();

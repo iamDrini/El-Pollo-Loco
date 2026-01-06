@@ -1,3 +1,6 @@
+/**
+ * Standard chicken enemy that walks left and switches to a dead sprite when defeated.
+ */
 class Chicken extends MovableObject {
 
     height = 90;
@@ -15,6 +18,9 @@ class Chicken extends MovableObject {
     ]
 
 
+    /**
+     * Spawn a chicken at a random x-position with slight speed variance and preload sprites.
+     */
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -25,6 +31,9 @@ class Chicken extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Continuously move left and play walking animation; switch to dead sprite when defeated.
+     */
     animate() {
         setInterval(() => {
         if (this.isDead()) {

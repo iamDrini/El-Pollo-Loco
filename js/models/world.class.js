@@ -1,3 +1,6 @@
+/**
+ * Game world orchestrating rendering, collisions, and UI bars.
+ */
 class World {
     character = new Character();
     level = level1;
@@ -20,6 +23,11 @@ class World {
     keyboard;
     camera_x;
 
+    /**
+     * Initialize the world with canvas and keyboard input, then start loops.
+     * @param {HTMLCanvasElement} canvas - The main game canvas.
+     * @param {Keyboard} keyboard - Input state container.
+     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -29,6 +37,9 @@ class World {
         this.run();
     }
 
+    /**
+     * Link world references to entities and initialize collectible positions.
+     */
     setWorld() {
         this.character.world = this;
         this.enemies.find(e => e instanceof Endboss).world = this;
@@ -43,6 +54,9 @@ class World {
 
     }
 
+    /**
+     * Main game loop for collisions and throwing checks.
+     */
     run() {
         setInterval(() => {
             this.checkCollisions();
@@ -50,6 +64,9 @@ class World {
         }, 50);
     }
 
+    /**
+     * Aggregate collision checks for enemies, coins, bottles, and boss hits.
+     */
     checkCollisions() {
         this.collidingWithEnemy();
         this.collectingCoins();
@@ -59,6 +76,9 @@ class World {
 
     lastBottleThrow = 0;
 
+    /**
+     * Spawn a throwable bottle if input pressed, available bottles exist, and cooldown passed.
+     */
     checkThrowObjects() {
         const now = Date.now();
         if (this.keyboard.D && this.bottleCount > 0 && now - this.lastBottleThrow > 1000) {
@@ -70,6 +90,9 @@ class World {
         }
     }
 
+    /**
+     * Render loop: UI, objects, and frame scheduling.
+     */
     draw() {
         this.showGameOverScreens();
         this.clearAndTranslateCanvas();
@@ -79,6 +102,9 @@ class World {
         this.requestNextFrame();
     }
 
+    /**
+     * Toggle win/lose overlays and render the character on death.
+     */
     showGameOverScreens() {
         const gameOverScreen = document.getElementById('game-over-screen');
         const gameWinScreen = document.getElementById('game-win-screen');
@@ -96,11 +122,17 @@ class World {
         }
     }
 
+    /**
+     * Clear the canvas and apply camera translation.
+     */
     clearAndTranslateCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
     }
 
+    /**
+     * Draw background layers and UI elements.
+     */
     drawBackgroundAndUI() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
@@ -111,6 +143,9 @@ class World {
         this.addToMap(this.endbossBar);
     }
 
+    /**
+     * Draw all game entities and projectiles.
+     */
     drawGameObjects() {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
@@ -124,6 +159,9 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
     }
 
+    /**
+     * Schedule the next animation frame to continue rendering.
+     */
     requestNextFrame() {
         let self = this;
         requestAnimationFrame(function () {
@@ -131,6 +169,10 @@ class World {
         });
     }
 
+    /**
+     * Draw a single object, handling horizontal flip if needed.
+     * @param {MovableObject|DrawableObject} mo - Object to render.
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -141,6 +183,10 @@ class World {
             this.flipImageBack(mo);
         }
     }
+    /**
+     * Flip an image horizontally before drawing.
+     * @param {MovableObject|DrawableObject} mo - Object being drawn.
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -148,16 +194,27 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    /**
+     * Restore coordinates after a horizontal flip.
+     * @param {MovableObject|DrawableObject} mo - Object drawn flipped.
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+    /**
+     * Render an array of objects onto the map.
+     * @param {Array<MovableObject|DrawableObject>} objects - Items to draw.
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
 
+    /**
+     * Handle collisions between the character and enemies, applying damage or stomps.
+     */
     collidingWithEnemy() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && enemy.energy !== 0) {
@@ -171,6 +228,9 @@ class World {
         });
     }
 
+    /**
+     * Collect coins on collision and update the coin bar.
+     */
     collectingCoins() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.isColliding(coin)) {
@@ -182,6 +242,9 @@ class World {
         });
     }
 
+    /**
+     * Collect bottles on collision (up to cap) and update the bottle bar.
+     */
     collectingBottles() {
         if (this.bottleCount < 5)
             this.level.bottles = this.level.bottles.filter((bottle) => {
@@ -194,6 +257,9 @@ class World {
             });
     }
 
+    /**
+     * Check thrown bottles against the endboss, apply damage and splash handling.
+     */
     checkBottleHitsEndboss() {
         const endboss = this.enemies.find(e => e instanceof Endboss);
         if (!endboss) return;
@@ -214,6 +280,9 @@ class World {
     
 
 
+    /**
+     * Set all enemies' energy to zero (used when boss is defeated).
+     */
     allEnemiesDead(){
         this.level.enemies.forEach(enemy => {
             enemy.energy = 0;

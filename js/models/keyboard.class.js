@@ -1,3 +1,6 @@
+/**
+ * Simple keyboard state container for movement and actions.
+ */
 class Keyboard {
     LEFT = false;
     RIGHT = false;

@@ -1,3 +1,6 @@
+/**
+ * Small chicken enemy with simple walking and death animation.
+ */
 class Chick extends MovableObject {
 
     height = 60;
@@ -15,6 +18,9 @@ class Chick extends MovableObject {
     ]
 
 
+    /**
+     * Spawn a chick at a random x-position with slight speed variance and preload sprites.
+     */
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -25,6 +31,9 @@ class Chick extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Continuously move left and play walking animation; switch to dead sprite when defeated.
+     */
     animate() {
         setInterval(() => {
         if (this.isDead()) {
