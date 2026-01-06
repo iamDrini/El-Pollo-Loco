@@ -54,7 +54,6 @@ class MovableObject extends DrawableObject {
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height
-
     }
 
     /**
@@ -63,7 +62,7 @@ class MovableObject extends DrawableObject {
      * @returns {boolean} True if above and descending fast.
      */
     isOnChicken(mo) {
-        return this.x < mo.x + mo.width &&
+        return this.x + 50 < mo.x + mo.width &&
             this.x + this.width - 25 > mo.x &&
             this.y + this.height < mo.y &&
             this.speedY < -10;

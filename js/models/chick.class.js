@@ -17,7 +17,6 @@ class Chick extends MovableObject {
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ]
 
-
     /**
      * Spawn a chick at a random x-position with slight speed variance and preload sprites.
      */
@@ -27,7 +26,7 @@ class Chick extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.energy = 5;
         this.x = 400 + 2500 * Math.random();
-        this.speed = 2 + Math.random() * 0.25;
+        this.speed = 2 + Math.random() * 2;
         this.animate();
     }
 

@@ -17,6 +17,7 @@ class World {
     endboss = this.enemies.find(e => e instanceof Endboss);
     bossHurtSound = new Audio('audio/boss_hurt.mp3');
     characterHurtSound = new Audio('audio/character_hurt.mp3');
+    lastBottleThrow = 0;
 
     canvas;
     ctx;
@@ -51,7 +52,6 @@ class World {
             bottle.world = this;
             bottle.initPosition();
         });
-
     }
 
     /**
@@ -73,8 +73,6 @@ class World {
         this.collectingBottles();
         this.checkBottleHitsEndboss();
     }
-
-    lastBottleThrow = 0;
 
     /**
      * Spawn a throwable bottle if input pressed, available bottles exist, and cooldown passed.
@@ -183,6 +181,7 @@ class World {
             this.flipImageBack(mo);
         }
     }
+
     /**
      * Flip an image horizontally before drawing.
      * @param {MovableObject|DrawableObject} mo - Object being drawn.
@@ -217,7 +216,7 @@ class World {
      */
     collidingWithEnemy() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && enemy.energy !== 0) {
+            if (this.character.isColliding(enemy) && enemy.energy !== 0 && !this.character.isHurt()) {
                 this.character.hit();
                 if (!window.isMuted)
                 this.characterHurtSound.play();
@@ -277,8 +276,6 @@ class World {
             return true;
         });
     }
-    
-
 
     /**
      * Set all enemies' energy to zero (used when boss is defeated).

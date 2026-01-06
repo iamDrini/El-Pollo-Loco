@@ -1,6 +1,13 @@
-
-// Global mute state persisted in local storage.
 window.isMuted = localStorage.getItem('isMuted') === 'true';
+
+/**
+ * Prevent context menu on all button elements.
+ */
+document.addEventListener('contextmenu', (event) => {
+    if (event.target.closest('button')) {
+        event.preventDefault();
+    }
+});
 
 /** Toggle global mute state and persist it. */
 function toggleMute() {
@@ -24,8 +31,10 @@ backgroundMusic.volume = 0.5;
  */
 function startGame(){
     window.gameIsRestarting = false;
+    const footerRef = document.getElementById('footer-container');
     const startScreen = document.querySelector('.start-screen');
     const gameOverScreen = document.getElementById('game-over-screen');
+    if(window.innerWidth < 1020) footerRef.style.display = 'none';
     gameOverScreen.style.display = 'none';
     startScreen.style.display = 'none';
     backgroundMusic.currentTime = 0;
@@ -34,17 +43,18 @@ function startGame(){
     init();
 }
 
-
 /**
  * Restart the game: stop music, hide game over, show start screen.
  */
 function restartGame(){
     window.gameIsRestarting = true;
     backgroundMusic.pause();
+    const footerRef = document.getElementById('footer-container');
     const gameOverScreen = document.getElementById('game-over-screen');
     const startScreen = document.getElementById('start-screen');
     gameOverScreen.style.display = 'none';
     startScreen.style.display = 'block';
+    footerRef.style.display = 'flex';
 }
 
 /**
@@ -58,7 +68,6 @@ function updateMuteOverlay() {
             muteRef.classList.remove('mute-overlay')
         }
     }
-
 document.addEventListener('DOMContentLoaded', updateMuteOverlay);
 
 /**

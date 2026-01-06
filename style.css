@@ -10,6 +10,7 @@ body {
     min-height: 100vh;
     font-family: 'zabars', Arial, Helvetica, sans-serif;
     margin: 0;
+    position:relative;
 }
 
 a {
@@ -165,7 +166,7 @@ canvas {
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 5000;
+    z-index: 9999;
     padding: 2px;
 }
 
@@ -174,7 +175,6 @@ canvas {
     height: 100%;
     object-fit: contain;
     background: transparent;
-    z-index: 9000;
 }
 
 h1 {
@@ -341,8 +341,10 @@ footer button{
         display: none;
     }
 
-    footer {
-        display: none;
+    footer{
+        position: absolute;
+        bottom: 0;
+        z-index: 9999;
     }
 
     .fullscreen-btn{
@@ -363,14 +365,11 @@ footer button{
     }
 }
 
-@media screen and (max-width: 1024px) and (orientation: landscape) {
+@media screen and (max-width: 1370px) and (orientation: landscape) {
     .mobile-btn-container {
         display: flex;
     }
 
-    footer{
-        display: none;
-    }
 
     .control-container{
         display:none;

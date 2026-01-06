@@ -12,6 +12,7 @@ class CoinBar extends DrawableObject{
     ];
 
     percentages = 100;
+
       /**
         * Create a coin bar at its fixed screen position and preload images.
         */
@@ -33,8 +34,8 @@ class CoinBar extends DrawableObject{
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-
     }
+    
     /**
      * Map the current percentage to the corresponding sprite index.
      * @returns {number} Index within IMAGES for the current fill level.

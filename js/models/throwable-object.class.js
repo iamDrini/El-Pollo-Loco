@@ -3,6 +3,7 @@
  */
 class ThrowableObject extends CollactableObject {
     salsaThrow = new Audio('audio/salsa_hit.mp3');
+    isSplashed = false;
 
     /**
      * A thrown bottle stays 'above ground' until it splashes.
@@ -20,8 +21,6 @@ class ThrowableObject extends CollactableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ]
-
-    isSplashed = false;
 
     /**
      * Create a throwable bottle at character-relative coordinates and start its motion.

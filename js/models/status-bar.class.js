@@ -10,7 +10,9 @@ class StatusBar extends DrawableObject {
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png',
         'img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png',
     ];
+
     percentages = 100;
+
     /**
      * Create the health bar at its fixed position and preload images.
      */
@@ -32,8 +34,8 @@ class StatusBar extends DrawableObject {
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-
     }
+    
     /**
      * Map the current percentage to the corresponding sprite index.
      * @returns {number} Index within IMAGES for the current health level.

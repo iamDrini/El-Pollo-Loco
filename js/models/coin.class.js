@@ -15,5 +15,4 @@ class Coin extends CollactableObject{
         this.x = 0;
         this.y = 100 + 200 * Math.random();
     }
-
 }

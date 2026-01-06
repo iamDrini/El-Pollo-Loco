@@ -26,5 +26,4 @@ class Bottle extends CollactableObject {
             this.x + this.width > mo.x &&
             this.y < mo.y + mo.height;
     }
-
 }

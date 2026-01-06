@@ -1,7 +1,7 @@
 /**
  * Status bar for the endboss showing remaining energy.
  */
-class EndbossBar extends DrawableObject{
+class EndbossBar extends DrawableObject {
     IMAGES = [
         'img/7_statusbars/2_statusbar_endboss/orange/orange0.png',
         'img/7_statusbars/2_statusbar_endboss/orange/orange20.png',
@@ -10,7 +10,9 @@ class EndbossBar extends DrawableObject{
         'img/7_statusbars/2_statusbar_endboss/orange/orange80.png',
         'img/7_statusbars/2_statusbar_endboss/orange/orange100.png',
     ];
+
     percentages = 100;
+
     /**
      * Create an endboss bar bound to a specific endboss instance.
      * @param {Endboss} endboss - The boss whose health this bar represents.
@@ -21,7 +23,7 @@ class EndbossBar extends DrawableObject{
         this.endboss = endboss;
         this.x = endboss.x;
         this.y = 20;
-        this.width= 200;
+        this.width = 200;
         this.height = 55;
         this.setPercentage(100);
     }
@@ -31,10 +33,10 @@ class EndbossBar extends DrawableObject{
      * @param {CanvasRenderingContext2D} ctx - Canvas 2D rendering context.
      */
     draw(ctx) {
-            if (this.endboss.energy > 0) {
-                this.x = this.endboss.x + 50;
-                super.draw(ctx);
-            }
+        if (this.endboss.energy > 0) {
+            this.x = this.endboss.x + 50;
+            super.draw(ctx);
+        }
     }
 
     /**
@@ -45,8 +47,8 @@ class EndbossBar extends DrawableObject{
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex()];
         this.img = this.imageCache[path];
-
     }
+    
     /**
      * Map the current percentage to the corresponding sprite index.
      * @returns {number} Index within IMAGES for the current health level.

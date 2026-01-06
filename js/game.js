@@ -4,7 +4,6 @@ let keyboard = new Keyboard();
 const jumpSound = new Audio('audio/jump.mp3');
 const walkSound = new Audio('audio/walk.mp3');
 
-
 /**
  * Initialize canvas, level, and world instance.
  */
@@ -43,7 +42,6 @@ window.addEventListener('keydown', (e) => {
     if (e.keyCode == 68) {
         keyboard.D = true;
     }
-
 });
 
 /**
@@ -70,7 +68,6 @@ window.addEventListener('keyup', (e) => {
     if (e.keyCode == 68) {
         keyboard.D = false;
     }
-
 });
 
 /**
@@ -115,14 +112,12 @@ function bindMobileButton(buttonId, keyName, onPressSound = null) {
     btn.addEventListener('pointerleave', release);
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
     bindMobileButton('btn-right', 'RIGHT', walkSound);
     bindMobileButton('btn-left', 'LEFT', walkSound);
     bindMobileButton('btn-up', 'SPACE', jumpSound);
     bindMobileButton('salsa-btn', 'D');
 });
-
 
 /** Enter fullscreen for the canvas. */
 function fullscreen(){

@@ -15,6 +15,7 @@ class Cloud extends MovableObject{
         this.x = 600 * Math.random();
         this.animate();
     }
+    
     /**
      * Move the cloud left at a fixed interval to create parallax motion.
      */
