@@ -225,29 +225,6 @@ footer button{
     background: transparent;
 }
 
-@media only screen and (max-width: 720px) {
-    canvas {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
-
-    h1 {
-        display: none;
-    }
-
-    footer {
-        display: none;
-    }
-
-    .control-container {
-        display: none;
-    }
-}
 
 #rotate-overlay {
     position: fixed;
@@ -268,12 +245,12 @@ footer button{
     bottom: 0;
     width: 100%;
     display: none;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .mobile-btn {
-    height: 70px;
-    width: 70px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     border-style: none;
     /*rgba(192, 187, 187, 0.4);*/
@@ -345,6 +322,36 @@ footer button{
     height: 80%;
 }
 
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height:100vh;
+        width: 100vw;
+    }
+    .start-screen{
+        background-size: cover;
+    }
+
+    h1 {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .fullscreen-btn{
+        display:none;
+    }
+
+    
+}
+
 
 @media screen and (max-width: 900px) and (orientation: portrait) {
     #rotate-overlay {
@@ -356,13 +363,24 @@ footer button{
     }
 }
 
-@media screen and (max-width: 900px) and (orientation: landscape) {
+@media screen and (max-width: 1024px) and (orientation: landscape) {
     .mobile-btn-container {
         display: flex;
+    }
+
+    footer{
+        display: none;
+    }
+
+    .control-container{
+        display:none;
     }
 
 
     #rotate-overlay {
         display: none;
+    }
+    .fullscreen-btn{
+        display:none;
     }
 }
