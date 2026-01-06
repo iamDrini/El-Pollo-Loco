@@ -1,4 +1,4 @@
-class BottleBar extends DrawableObject{
+class BottleBar extends DrawableObject {
     IMAGES = [
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/0.png',
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/20.png',
@@ -13,7 +13,7 @@ class BottleBar extends DrawableObject{
         this.loadImages(this.IMAGES);
         this.x = 30;
         this.y = 75;
-        this.width= 200;
+        this.width = 200;
         this.height = 55;
         this.setPercentage(0);
     }
@@ -39,7 +39,4 @@ class BottleBar extends DrawableObject{
             return 0;
         }
     }
-
-
-
 }

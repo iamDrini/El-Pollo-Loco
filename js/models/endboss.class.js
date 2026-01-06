@@ -59,9 +59,7 @@ class Endboss extends MovableObject{
     }
 
     animate(){
-
         setInterval(() => {
-
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.applyGravityDead();

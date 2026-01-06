@@ -64,32 +64,36 @@ window.addEventListener('keyup', (e) => {
 
 });
 
+function setKeyState(keyName, isPressed, sound) {
+    keyboard[keyName] = isPressed;
+
+    if (!sound) return;
+
+    if (isPressed && !window.isMuted) {
+        sound.currentTime = 0;
+        sound.play();
+    } else {
+        sound.pause();
+    }
+}
+
 function bindMobileButton(buttonId, keyName, onPressSound = null) {
     const btn = document.getElementById(buttonId);
 
-    btn.addEventListener('pointerdown', (e) => {
+    const press   = (e) => {
         e.preventDefault();
-        keyboard[keyName] = true;
+        setKeyState(keyName, true, onPressSound);
+    };
 
-        if (onPressSound && !window.isMuted) {
-            onPressSound.play();
-        }
-    });
+    const release = () => {
+        setKeyState(keyName, false, onPressSound);
+    };
 
-    btn.addEventListener('pointerup', (e) => {
-        e.preventDefault();
-        keyboard[keyName] = false;
-
-        if (onPressSound) {
-            onPressSound.pause();
-        }
-    });
-
-    btn.addEventListener('pointerleave', () => {
-        keyboard[keyName] = false;
-        if (onPressSound) onPressSound.pause();
-    });
+    btn.addEventListener('pointerdown', press);
+    btn.addEventListener('pointerup', release);
+    btn.addEventListener('pointerleave', release);
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     bindMobileButton('btn-right', 'RIGHT', walkSound);

@@ -81,6 +81,12 @@ class Character extends MovableObject {
     }
 
     animate() {
+        this.updateMovementAndCamera();
+
+        this.updateStateCharacter();
+    }
+
+    updateMovementAndCamera(){
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -95,10 +101,11 @@ class Character extends MovableObject {
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
+    }
 
+    updateStateCharacter(){
         let lastMoveTime = Date.now();
         setInterval(() => {
-            // Bewegungserkennung
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.SPACE) {
                 lastMoveTime = Date.now();
             }
@@ -114,7 +121,6 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_SLEEPING);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    //walk animation
                     this.playAnimation(this.IMAGES_WALKING);
                 } else {
                     this.playAnimation(this.IMAGES_IDLE);

@@ -40,7 +40,4 @@ class CoinBar extends DrawableObject{
             return 0;
         }
     }
-    //bei checkCollisions Coins einsammeln !
-
-
 }

@@ -31,7 +31,6 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    //character.isColliding(chicken)
     isColliding(mo) {
         return this.x + this.width - 35 > mo.x &&
             this.y + this.height > mo.y &&
@@ -40,7 +39,6 @@ class MovableObject extends DrawableObject {
 
     }
 
-    //character.jumpOnChicken
     isOnChicken(mo) {
         return this.x < mo.x + mo.width &&
             this.x + this.width - 25 > mo.x &&
@@ -62,8 +60,8 @@ class MovableObject extends DrawableObject {
     }
 
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; //difference in milliseconds
-        timepassed = timepassed / 1000; //difference in seconds
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 

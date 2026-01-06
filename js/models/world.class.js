@@ -47,7 +47,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 100);
+        }, 50);
     }
 
     checkCollisions() {
@@ -71,6 +71,15 @@ class World {
     }
 
     draw() {
+        this.showGameOverScreens();
+        this.clearAndTranslateCanvas();
+        this.drawBackgroundAndUI();
+        this.drawGameObjects();
+        this.resetCanvasTransform();
+        this.requestNextFrame();
+    }
+
+    showGameOverScreens() {
         const gameOverScreen = document.getElementById('game-over-screen');
         const gameWinScreen = document.getElementById('game-win-screen');
         if (this.character.isDead() && !window.gameIsRestarting) {
@@ -85,34 +94,41 @@ class World {
         } else {
             gameWinScreen.style.display = 'none';
         }
+    }
+
+    clearAndTranslateCanvas() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
+    }
 
+    drawBackgroundAndUI() {
         this.addObjectsToMap(this.level.backgroundObjects);
-
         this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.bottleBar);
         this.ctx.translate(this.camera_x, 0);
-
         this.addToMap(this.endbossBar);
+    }
 
+    drawGameObjects() {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottles);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.throwableObjects);
+    }
 
+    resetCanvasTransform() {
         this.ctx.translate(-this.camera_x, 0);
+    }
 
+    requestNextFrame() {
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
-
     }
 
     addToMap(mo) {
@@ -184,8 +200,7 @@ class World {
         this.throwableObjects = this.throwableObjects.filter(bottle => {
             if (bottle.isSplashed) return false;
             if (bottle.isColliding(endboss)) {
-                if (!window.isMuted)
-                this.bossHurtSound.play();
+                if (!window.isMuted) this.bossHurtSound.play();
                 endboss.energy -= 20;
                 if (endboss.energy < 0) endboss.energy = 0;
                 this.endbossBar.setPercentage(endboss.energy);
@@ -196,6 +211,8 @@ class World {
             return true;
         });
     }
+    
+
 
     allEnemiesDead(){
         this.level.enemies.forEach(enemy => {
