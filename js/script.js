@@ -13,6 +13,13 @@ document.addEventListener('contextmenu', (event) => {
 function toggleMute() {
     window.isMuted = !window.isMuted;
     localStorage.setItem('isMuted', window.isMuted);
+    updateMuteOverlay();
+    
+    if (window.isMuted && !backgroundMusic.paused) {
+        backgroundMusic.pause();
+    } else if (!window.isMuted && backgroundMusic.paused && !window.gameIsRestarting) {
+        backgroundMusic.play();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
