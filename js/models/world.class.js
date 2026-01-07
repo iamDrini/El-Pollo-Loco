@@ -80,7 +80,7 @@ class World {
     checkThrowObjects() {
         const now = Date.now();
         if (this.keyboard.D && this.bottleCount > 0 && now - this.lastBottleThrow > 1000) {
-            let bottle = new ThrowableObject(this.character.x, this.character.y);
+            let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
             this.throwableObjects.push(bottle);
             this.bottleCount--;
             this.bottleBar.setPercentage(this.bottleCount * 20);
@@ -106,7 +106,7 @@ class World {
     showGameOverScreens() {
         const gameOverScreen = document.getElementById('game-over-screen');
         const gameWinScreen = document.getElementById('game-win-screen');
-        if (this.character.isDead() && !window.gameIsRestarting) {
+        if ((this.character.isDead() || this.level.bottles.length + this.bottleCount < 1) && !window.gameIsRestarting) {
             gameOverScreen.style.display = 'flex';
             this.addToMap(this.character);
         } else {
@@ -116,8 +116,20 @@ class World {
             gameWinScreen.style.display = 'flex';
             this.allEnemiesDead();
         } else {
-            gameWinScreen.style.display = 'none';
+    ';
         }
+        
+    }
+
+    delBottleBehindEnboss(){
+        const endboss = this.enemies.find(e => e instanceof Endboss);
+        if (!endboss) return;
+
+        this.level.bottles.forEach(bottle => {
+            if (endboss.x < bottle.x) {
+                bottle.isSplashed = true;
+            }
+        });
     }
 
     /**

@@ -98,9 +98,9 @@ class Character extends MovableObject {
     /**
      * Poll keyboard input to move the character and update the camera offset.
      */
-    updateMovementAndCamera(){
+    updateMovementAndCamera() {
         setInterval(() => {
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.endboss.x) {
                 this.moveRight();
                 this.otherDirection = false;
             }
@@ -118,7 +118,7 @@ class Character extends MovableObject {
     /**
      * Drive character animation states based on movement, inactivity, and health.
      */
-    updateStateCharacter(){
+    updateStateCharacter() {
         let lastMoveTime = Date.now();
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.SPACE) {
@@ -132,7 +132,11 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else if (Date.now() - lastMoveTime > 10000) {
+            } else if (this.world.keyboard.D) {
+                this.playAnimation(this.IMAGES_IDLE);
+                lastMoveTime = Date.now();
+            }
+            else if (Date.now() - lastMoveTime > 10000) {
                 this.playAnimation(this.IMAGES_SLEEPING);
             } else {
                 if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {

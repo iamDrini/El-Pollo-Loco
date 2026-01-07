@@ -46,6 +46,9 @@ function initLevel() {
             new Endboss(),
         ],
         [
+            new Cloud(),
+            new Cloud(),
+            new Cloud(),
             new Cloud()
         ],
 

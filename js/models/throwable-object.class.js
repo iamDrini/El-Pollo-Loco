@@ -27,10 +27,12 @@ class ThrowableObject extends CollactableObject {
      * @param {number} x - Initial x-position (typically the character's x).
      * @param {number} y - Initial y-position (typically the character's y).
      */
-    constructor(x, y) {
+    constructor(x, y, isFacingLeft = false) {
         super().loadImage('img/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.IMAGE_SPLASH);
-        this.x = x + 50;
+        this.direction = isFacingLeft ? -1 : 1;
+        this.otherDirection = isFacingLeft;
+        this.x = x + 50 * this.direction;
         this.y = y + 100;
         this.height = 70;
         this.width = 70;
@@ -46,7 +48,7 @@ class ThrowableObject extends CollactableObject {
         this.applyGravity();
         this.throwInterval = setInterval(() => {
             if (!this.isSplashed) {
-                this.x += 15;
+                this.x += 15 * this.direction;
             }
         }, 25);
     }
