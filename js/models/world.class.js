@@ -236,6 +236,8 @@ class World {
                 this.statusBar.setPercentage(this.character.energy);
             } else if (this.character.isOnChicken(enemy)) {
                 enemy.energy = 0;
+            } else if (this.character.isColliding(this.endboss) && this.endboss.energy !== 0){
+                this.character - 20;
             }
         });
     }
@@ -245,7 +247,7 @@ class World {
      */
     collectingCoins() {
         this.level.coins = this.level.coins.filter((coin) => {
-            if (this.character.isColliding(coin)) {
+            if (this.character.isCollidingCoin(coin)) {
                 this.coinCount++;
                 this.coinBar.setPercentage(this.coinCount * 20);
                 return false;

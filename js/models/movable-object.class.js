@@ -50,10 +50,17 @@ class MovableObject extends DrawableObject {
      * @returns {boolean} True if bounding boxes overlap.
      */
     isColliding(mo) {
-        return this.x + this.width - 35 > mo.x &&
+        return this.x + this.width - 40 > mo.x &&
             this.y + this.height > mo.y &&
-            this.x < mo.x &&
+            this.x < mo.x + mo.width -60 &&
             this.y < mo.y + mo.height
+    }
+
+    isCollidingCoin(mo) {
+        return this.x + this.width  > mo.x &&
+            this.y + this.height - 100 > mo.y &&
+            this.x < mo.x + mo.width &&
+            this.y< mo.y + mo.height
     }
 
     /**
@@ -96,7 +103,7 @@ class MovableObject extends DrawableObject {
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
-        return timepassed < 0.2;
+        return timepassed < 0.4;
     }
 
     /**
