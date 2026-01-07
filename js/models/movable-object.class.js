@@ -81,7 +81,7 @@ class MovableObject extends DrawableObject {
      * @returns {boolean} True if within 450px.
      */
     isReachable(endboss) {
-        return this.x - endboss.x <= 450;
+        return this.x - endboss.x <= 300;
     }
 
     /**

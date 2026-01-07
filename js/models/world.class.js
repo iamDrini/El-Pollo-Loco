@@ -111,6 +111,16 @@ class World {
         const isGameOver = (this.character.isDead() || this.level.bottles.length + this.bottleCount < 1) && !window.gameIsRestarting;
         const isGameWin = this.endboss.isDead() && !window.gameIsRestarting;
         this.gameStopped = isGameOver || isGameWin;
+        this.toggleGameOverScreen(isGameOver, gameOverScreen);
+        this.toggleGameWinScreen(isGameWin, gameWinScreen);
+    }
+
+    /**
+     * Show or hide the game over screen based on game state.
+     * @param {boolean} isGameOver - Whether the game is over.
+     * @param {HTMLElement} gameOverScreen - The game over screen element.
+     */
+    toggleGameOverScreen(isGameOver, gameOverScreen) {
         if (isGameOver) {
             gameOverScreen.style.display = 'flex';
             this.addToMap(this.character);
@@ -118,13 +128,23 @@ class World {
         } else {
             gameOverScreen.style.display = 'none';
         }
+    }
+
+    /**
+     * Show or hide the game win screen based on game state.
+     * @param {boolean} isGameWin - Whether the game is won.
+     * @param {HTMLElement} gameWinScreen - The game win screen element.
+     */
+    toggleGameWinScreen(isGameWin, gameWinScreen) {
         if (isGameWin) {
             gameWinScreen.style.display = 'flex';
             this.allEnemiesDead();
         } else {
             gameWinScreen.style.display = 'none';
-        }  
+        }
     }
+
+    
 
     removeBottlesBehindEndboss() {
         const endboss = this.enemies.find(e => e instanceof Endboss);
@@ -275,20 +295,19 @@ class World {
      * Check thrown bottles against the endboss, apply damage and splash handling.
      */
     checkBottleHitsEndboss() {
-        const endboss = this.enemies.find(e => e instanceof Endboss);
-        if (!endboss) return;
+        if (!this.endboss) return;
         this.throwableObjects = this.throwableObjects.filter(bottle => {
             if (bottle.isSplashed) return false;
-            if (bottle.isColliding(endboss)) {
+            if (bottle.isColliding(this.endboss)) {
                 if (!window.isMuted) this.bossHurtSound.play();
-                endboss.energy -= 20;
-                if (endboss.energy < 0) endboss.energy = 0;
-                this.endbossBar.setPercentage(endboss.energy);
+                this.endboss.hit();
+                this.endboss.isHurt();
+                if (this.endboss.energy < 0) this.endboss.energy = 0;
+                this.endbossBar.setPercentage(this.endboss.energy);
                 bottle.isSplashed = true;
                 if (typeof bottle.startSplashAnimation === 'function') bottle.startSplashAnimation();
                 return false;
-            }
-            return true;
+            } return true;
         });
     }
 

@@ -11,7 +11,7 @@ class EndbossBar extends DrawableObject {
         'img/7_statusbars/2_statusbar_endboss/orange/orange100.png',
     ];
 
-    percentages = 100;
+    percentages = 50;
 
     /**
      * Create an endboss bar bound to a specific endboss instance.
@@ -25,7 +25,7 @@ class EndbossBar extends DrawableObject {
         this.y = 20;
         this.width = 200;
         this.height = 55;
-        this.setPercentage(100);
+        this.setPercentage(50);
     }
 
     /**
@@ -54,15 +54,15 @@ class EndbossBar extends DrawableObject {
      * @returns {number} Index within IMAGES for the current health level.
      */
     resolveImageIndex() {
-        if (this.percentage == 100) {
+        if (this.percentage == 50) {
             return 5;
-        } else if (this.percentage >= 80) {
-            return 4;
-        } else if (this.percentage >= 60) {
-            return 3;
         } else if (this.percentage >= 40) {
-            return 2;
+            return 4;
+        } else if (this.percentage >= 30) {
+            return 3;
         } else if (this.percentage >= 20) {
+            return 2;
+        } else if (this.percentage > 0) {
             return 1;
         } else {
             return 0;

@@ -6,7 +6,7 @@ class Endboss extends MovableObject{
     height = 400;
     width = 300;
     y = 55;
-    energy = 100;
+    energy = 50;
     world;
 
     IMAGES_STANDING = [
@@ -75,7 +75,7 @@ class Endboss extends MovableObject{
             }else if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
             }else if(this.world && this.isReachable(this.world.character)){
-                this.speed = 10;
+                this.speed = 20;
                 this.playAnimation(this.IMAGES_ALERT);
                 this.moveLeft();
             }else {

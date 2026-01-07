@@ -120,35 +120,47 @@ class Character extends MovableObject {
      * Drive character animation states based on movement, inactivity, and health.
      */
     updateStateCharacter() {
-        let lastMoveTime = Date.now();
+        let lastMoveTime;
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE || this.world.keyboard.D) {
                 lastMoveTime = Date.now();
             }
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.applyGravityDead();
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMPING);
-            } else if (this.world.keyboard.D) {
-                this.playAnimation(this.IMAGES_IDLE);
-            } else if (Date.now() - lastMoveTime > 7000) {
-                this.playAnimation(this.IMAGES_SLEEPING);
-            } else {
-                this.isCharacterMoving();
-            }
+            this.typeOfAnimation();
         }, 150);
     }
 
-    isCharacterMoving(){
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                } else {
-                    this.playAnimation(this.IMAGES_IDLE);
-                }
+    /**
+     * Determine and play the appropriate animation based on character state.
+     * Prioritizes death, hurt, jumping, throwing, sleeping, and movement animations.
+     */
+    typeOfAnimation() {
+        let lastMoveTime = Date.now();
+        if (this.isDead()) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.applyGravityDead();
+        } else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.isAboveGround()) {
+            this.playAnimation(this.IMAGES_JUMPING);
+        } else if (this.world.keyboard.D) {
+            this.playAnimation(this.IMAGES_IDLE);
+        } else if (Date.now() - lastMoveTime > 7000) {
+            this.playAnimation(this.IMAGES_SLEEPING);
+        } else {
+            this.isCharacterMoving();
+        }
     }
 
-    
+    /**
+     * Check if character is moving and play walking or idle animation accordingly.
+     */
+    isCharacterMoving() {
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_WALKING);
+        } else {
+            this.playAnimation(this.IMAGES_IDLE);
+        }
+    }
+
+
 }
