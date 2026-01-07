@@ -14,6 +14,7 @@ class World {
     throwableObjects = [];
     coinCount = 0;
     bottleCount = 0;
+    gameStopped = false;
     endboss = this.enemies.find(e => e instanceof Endboss);
     bossHurtSound = new Audio('audio/boss_hurt.mp3');
     characterHurtSound = new Audio('audio/character_hurt.mp3');
@@ -61,6 +62,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.removeBottlesBehindEndboss();
         }, 50);
     }
 
@@ -106,30 +108,29 @@ class World {
     showGameOverScreens() {
         const gameOverScreen = document.getElementById('game-over-screen');
         const gameWinScreen = document.getElementById('game-win-screen');
-        if ((this.character.isDead() || this.level.bottles.length + this.bottleCount < 1) && !window.gameIsRestarting) {
+        const isGameOver = (this.character.isDead() || this.level.bottles.length + this.bottleCount < 1) && !window.gameIsRestarting;
+        const isGameWin = this.endboss.isDead() && !window.gameIsRestarting;
+        this.gameStopped = isGameOver || isGameWin;
+        if (isGameOver) {
             gameOverScreen.style.display = 'flex';
             this.addToMap(this.character);
+            this.character.energy = 0;
         } else {
             gameOverScreen.style.display = 'none';
         }
-        if (this.endboss.isDead() && !window.gameIsRestarting) {
+        if (isGameWin) {
             gameWinScreen.style.display = 'flex';
             this.allEnemiesDead();
         } else {
-    ';
-        }
-        
+            gameWinScreen.style.display = 'none';
+        }  
     }
 
-    delBottleBehindEnboss(){
+    removeBottlesBehindEndboss() {
         const endboss = this.enemies.find(e => e instanceof Endboss);
         if (!endboss) return;
-
-        this.level.bottles.forEach(bottle => {
-            if (endboss.x < bottle.x) {
-                bottle.isSplashed = true;
-            }
-        });
+        const bossRightEdge = endboss.x + (endboss.width || 0);
+        this.level.bottles = this.level.bottles.filter(bottle => bottle.x <= bossRightEdge);
     }
 
     /**

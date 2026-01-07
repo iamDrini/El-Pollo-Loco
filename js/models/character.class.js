@@ -100,6 +100,7 @@ class Character extends MovableObject {
      */
     updateMovementAndCamera() {
         setInterval(() => {
+            if (this.world && this.world.gameStopped) return;
             if (this.world.keyboard.RIGHT && this.x < this.world.endboss.x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -121,10 +122,9 @@ class Character extends MovableObject {
     updateStateCharacter() {
         let lastMoveTime = Date.now();
         setInterval(() => {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.SPACE) {
+            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.world.keyboard.SPACE || this.world.keyboard.D) {
                 lastMoveTime = Date.now();
             }
-
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.applyGravityDead();
@@ -134,17 +134,21 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.D) {
                 this.playAnimation(this.IMAGES_IDLE);
-                lastMoveTime = Date.now();
-            }
-            else if (Date.now() - lastMoveTime > 10000) {
+            } else if (Date.now() - lastMoveTime > 7000) {
                 this.playAnimation(this.IMAGES_SLEEPING);
             } else {
-                if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.isCharacterMoving();
+            }
+        }, 150);
+    }
+
+    isCharacterMoving(){
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                     this.playAnimation(this.IMAGES_WALKING);
                 } else {
                     this.playAnimation(this.IMAGES_IDLE);
                 }
-            }
-        }, 150);
     }
+
+    
 }
