@@ -136,8 +136,7 @@ class Character extends MovableObject {
     typeOfAnimation() {
         let lastMoveTime = Date.now();
         if (this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
-            this.applyGravityDead();
+            this.playDeadAnimation();
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
@@ -149,6 +148,14 @@ class Character extends MovableObject {
         } else {
             this.isCharacterMoving();
         }
+    }
+
+    /**
+     * Play the death animation and apply gravity for the dead character.
+     */
+    playDeadAnimation(){
+        this.playAnimation(this.IMAGES_DEAD);
+        this.applyGravityDead();
     }
 
     /**
