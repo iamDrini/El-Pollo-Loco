@@ -146,6 +146,10 @@ class World {
 
     
 
+    /**
+     * Remove bottles that are positioned behind (to the right of) the endboss.
+     * Prevents bottles from being collected in areas beyond the boss fight.
+     */
     removeBottlesBehindEndboss() {
         const endboss = this.enemies.find(e => e instanceof Endboss);
         if (!endboss) return;
@@ -186,6 +190,10 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
     }
 
+    /**
+     * Reset the canvas transformation to the default state.
+     * Restores the canvas by reversing the camera translation applied earlier.
+     */
     resetCanvasTransform() {
         this.ctx.translate(-this.camera_x, 0);
     }
@@ -301,6 +309,9 @@ class World {
             if (bottle.isColliding(this.endboss)) {
                 if (!window.isMuted) this.bossHurtSound.play();
                 this.endboss.hit();
+                this.endboss.hit();
+                console.log(this.endboss.energy);
+                
                 this.endboss.isHurt();
                 if (this.endboss.energy < 0) this.endboss.energy = 0;
                 this.endbossBar.setPercentage(this.endboss.energy);

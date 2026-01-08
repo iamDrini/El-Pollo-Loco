@@ -22,6 +22,10 @@ function toggleMute() {
     }
 }
 
+/**
+ * Initialize game screens on page load.
+ * Ensures game over and win screens are hidden when the page is first loaded.
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const gameOverScreen = document.getElementById('game-over-screen');
     const gameWinScreen = document.getElementById('game-win-screen');

@@ -38,4 +38,35 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
+
+    /**
+     * Map a percentage value to an image index for status bars.
+     * Returns an index from 0 to 5 based on the current percentage value.
+     * @returns {number} Image index (0=empty, 5=full).
+     */
+    resolveImageIndex() {
+        if (this.percentage == 100) {
+            return 5;
+        } else if (this.percentage >= 80) {
+            return 4;
+        } else if (this.percentage >= 60) {
+            return 3;
+        } else if (this.percentage >= 40) {
+            return 2;
+        } else if (this.percentage > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    /**
+     * Update the displayed health percentage and select the matching sprite.
+     * @param {number} percentage - Value between 0 and 100 indicating boss health.
+     */
+    setPercentage(percentage) {
+        this.percentage = percentage;
+        let path = this.IMAGES[this.resolveImageIndex()];
+        this.img = this.imageCache[path];
+    }
 }

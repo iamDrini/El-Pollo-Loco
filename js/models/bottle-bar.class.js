@@ -25,34 +25,4 @@ class BottleBar extends DrawableObject {
         this.height = 55;
         this.setPercentage(0);
     }
-
-    /**
-     * Update the displayed bottle fill percentage and pick the matching sprite.
-     * @param {number} percentage - Value between 0 and 100 indicating bottle fill.
-     */
-    setPercentage(percentage) {
-        this.percentage = percentage;
-        let path = this.IMAGES[this.resolveImageIndex()];
-        this.img = this.imageCache[path];
-    }
-    
-    /**
-     * Map the current percentage to the corresponding sprite index.
-     * @returns {number} Index within IMAGES for the current fill level.
-     */
-    resolveImageIndex() {
-        if (this.percentage == 100) {
-            return 5;
-        } else if (this.percentage >= 80) {
-            return 4;
-        } else if (this.percentage >= 60) {
-            return 3;
-        } else if (this.percentage >= 40) {
-            return 2;
-        } else if (this.percentage >= 20) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
 }
